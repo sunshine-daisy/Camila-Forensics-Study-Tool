@@ -581,13 +581,25 @@ body::before {
 /* DIAGRAM */
 .diagram-img {
   width: 100%;
-  max-width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  margin-bottom: 20px;
+  max-width: 420px;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  margin-bottom: 12px;
   display: block;
-  cursor: pointer;
-  transition: transform 0.2s;
+  cursor: zoom-in;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.diagram-img:hover {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pink-glow);
+}
+.diagram-img-hint {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
 .diagram-img.img-expanded {
   position: fixed;
@@ -597,10 +609,12 @@ body::before {
   max-width: 92vw;
   max-height: 88vh;
   width: auto;
+  height: auto;
   z-index: 999;
   border: 2px solid var(--pink);
   border-radius: 12px;
-  box-shadow: 0 0 0 9999px rgba(0,0,0,0.75);
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.82);
+  cursor: zoom-out;
 }
 
 .img-placeholder {
@@ -1767,6 +1781,7 @@ function renderQuestion(q, idx, total) {
       <img class="diagram-img" src="${q.img}" alt="${q.imgAlt}"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
         onclick="this.classList.toggle('img-expanded')" title="Click to expand"/>
+      <div class="diagram-img-hint">🔍 Tap image to expand</div>
       <div class="img-placeholder" style="display:none">
         <span class="ph-icon">🖼</span>
         <strong>${q.imgAlt}</strong>
