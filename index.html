@@ -830,7 +830,7 @@ body::before {
       <div class="unit-preview-grid">
         <div class="unit-preview-item border-7" onclick="startWithUnit(0)">
           <div class="unit-num">Unit 7</div>
-          <div class="unit-name">Trace Evidence <span class="unit-qs">— 28 Qs</span></div>
+          <div class="unit-name">Trace Evidence <span class="unit-qs">— 31 Qs</span></div>
         </div>
         <div class="unit-preview-item border-8" onclick="startWithUnit(1)">
           <div class="unit-num">Unit 8</div>
@@ -842,11 +842,11 @@ body::before {
         </div>
         <div class="unit-preview-item border-10" onclick="startWithUnit(3)">
           <div class="unit-num">Unit 10</div>
-          <div class="unit-name">Forensic Anthropology <span class="unit-qs">— 46 Qs</span></div>
+          <div class="unit-name">Forensic Anthropology <span class="unit-qs">— 48 Qs</span></div>
         </div>
         <div class="unit-preview-item border-11" onclick="startWithUnit(4)" style="grid-column: span 2;">
           <div class="unit-num">Unit 11</div>
-          <div class="unit-name">Documents & Handwriting <span class="unit-qs">— 47 Qs</span></div>
+          <div class="unit-name">Documents & Handwriting <span class="unit-qs">— 58 Qs</span></div>
         </div>
       </div>
     </div>
@@ -874,7 +874,7 @@ body::before {
       <button class="unit-btn active border-7" onclick="selectUnit(0)" id="ubtn-0">
         <span class="unit-dot dot-7"></span>
         <span class="unit-btn-text">Unit 7 — Trace Evidence</span>
-        <span class="unit-btn-count" id="ucount-0">28</span>
+        <span class="unit-btn-count" id="ucount-0">31</span>
       </button>
       <button class="unit-btn border-8" onclick="selectUnit(1)" id="ubtn-1">
         <span class="unit-dot dot-8"></span>
@@ -889,12 +889,12 @@ body::before {
       <button class="unit-btn border-10" onclick="selectUnit(3)" id="ubtn-3">
         <span class="unit-dot dot-10"></span>
         <span class="unit-btn-text">Unit 10 — Anthropology</span>
-        <span class="unit-btn-count" id="ucount-3">46</span>
+        <span class="unit-btn-count" id="ucount-3">48</span>
       </button>
       <button class="unit-btn border-11" onclick="selectUnit(4)" id="ubtn-4">
         <span class="unit-dot dot-11"></span>
         <span class="unit-btn-text">Unit 11 — Documents</span>
-        <span class="unit-btn-count" id="ucount-4">47</span>
+        <span class="unit-btn-count" id="ucount-4">58</span>
       </button>
 
       <div class="sidebar-progress">
@@ -1001,6 +1001,9 @@ const UNITS = [
       { type: "diagram", img: "diagrams/07-U3-Hair-Anatomy-Cross-Section.jpg", imgAlt: "Hair cross section diagram", q: "In the hair cross-section diagram, what are the three structural layers from outside to inside?", options: ["Medulla, Cortex, Cuticle", "Cuticle, Cortex, Medulla", "Cortex, Cuticle, Medulla", "Cuticle, Medulla, Cortex"], correct: 1, explain: "From outside to inside: Cuticle (outer scale layer) → Cortex (middle, contains pigment) → Medulla (inner core, may be absent in humans)." },
       { type: "diagram", img: "diagrams/10-U4-Glass-Fracture-Patterns.jpg", imgAlt: "Glass fracture radial concentric diagram", q: "Looking at a glass fracture pattern, which type of crack forms FIRST?", options: ["Concentric cracks", "Radial cracks", "Both form simultaneously", "Wallner lines"], correct: 1, explain: "Radial fractures always form first — they extend outward from the point of impact. Concentric fractures form later, connecting the radials in a ring pattern." },
       { type: "diagram", img: "diagrams/11-U4-Refractive-Index-Glass.jpg", imgAlt: "Becke line refractive index diagram", q: "In the Becke line test, when you RAISE the focus of the microscope, the bright line moves toward:", options: ["The material with LOWER refractive index", "The material with HIGHER refractive index", "The center of the field", "It disappears"], correct: 1, explain: "The Becke line always moves toward the material with the higher refractive index when the microscope focus is raised." },
+      { type: "diagram", img: "diagrams/08-U3-Human-vs-Animal-Hair.jpg", imgAlt: "Human vs animal hair comparison", q: "In the human vs animal hair comparison, which feature MOST reliably distinguishes human hair from animal hair?", options: ["Color of the cortex", "Medullary index and medulla pattern — humans < 1/3, animals > 1/3", "Length of the hair shaft", "Presence of a cuticle"], correct: 1, explain: "The medullary index (medulla width ÷ hair width) is the key distinguisher: humans have < 1/3 with absent/fragmented medulla; animals typically have > 1/3 with continuous or latticed medulla patterns." },
+      { type: "diagram", img: "diagrams/09-U3-Fiber-Types-Chart.jpg", imgAlt: "Fiber types chart natural vs synthetic", q: "A fiber sample burns, leaves a soft ash, and smells like burning paper. Based on the fiber types chart, this fiber is most likely:", options: ["Nylon (synthetic)", "Cotton (natural cellulose)", "Wool (natural protein)", "Polyester (synthetic)"], correct: 1, explain: "Cotton is a natural cellulose fiber — it burns cleanly, leaves a soft gray ash, and smells like burning paper. Synthetic fibers melt and form hard beads; wool (protein) burns with a smell of burning hair." },
+      { type: "diagram", img: "diagrams/12-U4-Soil-Horizon-Analysis.jpg", imgAlt: "Soil horizon analysis diagram", q: "In soil horizon analysis, which layer (horizon) would a buried object most likely be found in?", options: ["O horizon — organic surface layer", "A horizon — topsoil", "B horizon — subsoil accumulation layer", "C horizon — parent material/bedrock"], correct: 1, explain: "Buried objects are most commonly found in the A horizon (topsoil) or at the A/B boundary. The O horizon is the very surface organic layer; the B horizon is deeper subsoil. Disturbance of soil layers can itself be evidence of a burial." },
     ]
   },
 
@@ -1268,6 +1271,8 @@ const UNITS = [
       // DIAGRAM
       { type: "diagram", img: "diagrams/27a-U10-Cranial-Bone-Types.jpg", imgAlt: "Male vs female skull comparison", q: "Looking at two skulls, Skull A has a pronounced brow ridge, square eye orbits, and an occipital protuberance. Skull A is most likely:", options: ["Female", "Male", "Cannot be determined", "Juvenile"], correct: 1, explain: "These are all male skull characteristics: prominent brow ridge (supraorbital ridge), square/rectangular orbits, and occipital protuberance (bump at back of skull)." },
       { type: "diagram", img: "diagrams/27b-U10-Pelvic-Girdle-Geometry.jpg", imgAlt: "Male vs female pelvis comparison", q: "Which pelvis diagram shows a subpubic angle greater than 90°?", options: ["The narrower, blade-shaped pelvis", "The wider, bowl-shaped pelvis", "Both have the same angle", "Neither — angle is always exactly 90°"], correct: 1, explain: "The wider, bowl-shaped pelvis belongs to a female (subpubic angle > 90°). The narrower, blade-shaped pelvis belongs to a male (< 90°). This shape difference evolved for childbirth." },
+      { type: "diagram", img: "diagrams/28a-U10-Age-Estimation-Markers.jpg", imgAlt: "Bone age estimation markers", q: "According to the age estimation diagram, which bone is the LAST to fuse its growth plate in young adults?", options: ["Femur (thigh bone)", "Tibia (shin bone)", "Clavicle (collarbone) — last to fuse ~age 25", "Radius (forearm)"], correct: 2, explain: "The clavicle's medial (sternal) end is the last major growth plate to fuse, completing around age 22–25. This makes it extremely useful for estimating age in young adults." },
+      { type: "diagram", img: "diagrams/29-U10-Skeletal-Trauma-Types.jpg", imgAlt: "Skeletal trauma types antemortem perimortem postmortem", q: "A fracture showing green-stick characteristics with flexible bone behavior is classified as:", options: ["Antemortem — healed edges showing bone repair", "Perimortem — fresh bone, still flexible at time of injury", "Postmortem — dry brittle fracture after death", "Cannot be determined from bone alone"], correct: 1, explain: "Perimortem fractures occur around the time of death when bone still retains moisture and flexibility — producing green-stick fracture patterns. Antemortem shows healing; postmortem shows dry, brittle edges." },
 
       // ── ANIMAL VS HUMAN SKELETON, HEIGHT CALC, TEETH (Ms. Makley study guide) ──
       { type: "flashcard", term: "Human vs Animal Skull — Foramen Magnum", def: "In HUMANS: foramen magnum is centrally located under the skull (we walk upright). In ANIMALS (quadrupeds): foramen magnum is at the BACK/POSTERIOR of the skull (spine connects horizontally). This is the most important structural difference." },
@@ -1360,6 +1365,8 @@ const UNITS = [
       // DIAGRAM
       { type: "diagram", img: "diagrams/30-U11-Handwriting-Comparison.jpg", imgAlt: "Handwriting characteristics diagram", q: "Which handwriting characteristic refers to how hard the writer presses the pen against the paper?", options: ["Slope", "Pressure", "Angularity", "Alignment"], correct: 1, explain: "Pressure refers to the force applied by the writer. Heavy pressure leaves indentations visible from the back; this is also measurable with an electrostatic detection apparatus (ESDA)." },
       { type: "diagram", img: "diagrams/R2-U11-Currency-Security-Features.png", imgAlt: "US currency security features diagram", q: "Which security feature on US currency is visible ONLY under ultraviolet light?", options: ["Microprinting", "Raised printing", "Security thread/UV thread", "Color-shifting ink"], correct: 2, explain: "The UV/fluorescent security thread is embedded in the paper and only glows under UV light — making it impossible to photocopy. Each denomination glows a different color." },
+      { type: "diagram", img: "diagrams/31-U11-Shoe-Print-Evidence.jpg", imgAlt: "Shoe print evidence class vs individual characteristics", q: "Looking at the shoe print evidence diagram, which feature would make a shoe print INDIVIDUAL evidence rather than class evidence?", options: ["The brand logo tread pattern — shared by all shoes of that model", "A unique cut, wear pattern, or damage specific to one shoe", "The overall shoe size", "The general tread design"], correct: 1, explain: "Class characteristics (brand, size, tread design) are shared by many shoes. Individual characteristics — a unique cut, specific wear pattern, nail hole, or damage — are unique to ONE shoe and can make a match." },
+      { type: "diagram", img: "diagrams/32-U11-Tire-Tread-Analysis.jpg", imgAlt: "Tire tread analysis class vs individual evidence", q: "Tire tread evidence found at a crime scene is most commonly considered what type of evidence?", options: ["Individual evidence — unique to one tire", "Class evidence — narrows the vehicle type but rarely identifies one specific tire", "Testimonial evidence", "Digital evidence"], correct: 1, explain: "Tire tread is usually class evidence — the pattern identifies the tire brand/model (narrowing suspects) but rarely identifies one specific tire. However, unique wear patterns or damage can elevate it to individual evidence." },
 
       // ── FRAUD, HANDWRITING FACTORS, TOOLS, 4-FEATURE METHOD (Ms. Makley study guide) ──
       { type: "flashcard", term: "Fraud", def: "Intentional deception for financial or personal gain. In document examination, fraud includes altering checks, forging wills or contracts, counterfeiting currency, and creating false identity documents. Fraud is broader than forgery — it covers any intentional deception." },
@@ -1396,6 +1403,23 @@ const UNITS = [
         ["Alignment", "How writing sits on the baseline"],
         ["Letter formation", "Shape of individual letters"],
         ["Rhythm", "Consistency and flow of the writing"]
+      ]},
+
+      // ── FACIAL RECONSTRUCTION (Unit 11 — Anthropology course outline) ──
+      { type: "flashcard", term: "Facial Reconstruction", def: "The process of rebuilding a face on a skull to help identify unknown remains. Can be done in 2D (artist sketch based on skull measurements) or 3D (clay/digital model built up on the skull). Uses tissue depth data from cadaver studies to estimate soft tissue thickness at key landmarks." },
+      { type: "flashcard", term: "Tissue Depth Markers", def: "Pegs or markers placed at specific anatomical landmarks on a skull showing the average soft tissue depth at that point. Based on statistical data from cadaver studies, varying by age, sex, and body build. The sculptor builds clay up to the tip of each peg." },
+      { type: "flashcard", term: "Facial Reconstruction — Limitations", def: "Facial reconstruction produces a general likeness, NOT an exact portrait. Features like ear shape, eye color, hair style, and skin tone cannot be determined from bone. It is a tool to generate leads, not to make a positive identification. Positive ID requires DNA, dental records, or fingerprints." },
+      { type: "mc", q: "What is the PRIMARY purpose of facial reconstruction in forensic science?", options: ["To make a definitive legal identification of remains", "To generate investigative leads by giving unknown remains a recognizable face", "To determine the cause of death", "To estimate the age of the individual"], correct: 1, explain: "Facial reconstruction generates leads — it produces a likeness to help the public recognize and report who the person might be. It cannot make a positive identification, which requires DNA, dental records, or fingerprints." },
+      { type: "mc", q: "Which facial features CANNOT be reliably determined from a skull alone?", options: ["General face shape and cheekbone structure", "Approximate nose width", "Eye color, hair style, and ear shape", "Approximate age range"], correct: 2, explain: "Bone gives us face shape, cheekbone prominence, nose width estimates, and approximate age. Soft tissue features — eye color, hair color and style, ear shape, lip fullness — cannot be determined from bone alone." },
+      { type: "mc", q: "Tissue depth markers used in facial reconstruction are based on:", options: ["The examiner's artistic judgment", "Statistical averages from cadaver studies at anatomical landmarks", "X-ray data from living patients", "The victim's medical records"], correct: 1, explain: "Tissue depth data comes from cadaver studies measuring soft tissue thickness at specific skull landmarks. The data varies by sex, age, and body build — a male adult has different average tissue depths than a female or child." },
+      { type: "fitb", q: "Facial reconstruction can generate investigative ______, but cannot make a positive identification.", answer: "leads", display: "leads" },
+      { type: "fitb", q: "A positive identification of skeletal remains requires DNA, fingerprints, or ______ records.", answer: "dental", display: "dental" },
+      { type: "matching", pairs: [
+        ["Facial reconstruction", "Rebuilds face to generate investigative leads"],
+        ["Tissue depth markers", "Pegs showing average soft tissue thickness at landmarks"],
+        ["2D reconstruction", "Artist sketch based on skull measurements"],
+        ["3D reconstruction", "Clay or digital model built on the skull"],
+        ["Positive ID method", "DNA, dental records, or fingerprints — NOT reconstruction"]
       ]},
     ]
   }
