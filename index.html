@@ -391,6 +391,33 @@ body::before {
 .q-tab:hover { border-color: var(--pink); color: var(--white); }
 .q-tab.active { background: var(--pink); border-color: var(--pink); color: #fff; }
 
+/* RESET BUTTONS */
+.reset-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-top: -12px;
+}
+.reset-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--gray);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 12px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.reset-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(248,113,113,0.08); }
+.reset-btn.reset-all { border-color: rgba(248,113,113,0.3); color: rgba(248,113,113,0.7); }
+.reset-btn.reset-all:hover { border-color: var(--danger); color: var(--danger); background: rgba(248,113,113,0.12); }
+
 /* QUESTION CARD */
 .question-card {
   background: var(--card);
@@ -1704,6 +1731,11 @@ function renderUnitContent() {
       <button class="q-tab ${currentQType==='matching'?'active':''}" onclick="filterType('matching')">🔗 Matching</button>
       <button class="q-tab ${currentQType==='diagram'?'active':''}" onclick="filterType('diagram')">🖼 Diagrams</button>
     </div>
+    <div class="reset-bar">
+      <button class="reset-btn" onclick="resetType()" title="Clear answers for current question type only">↺ Reset This Type</button>
+      <button class="reset-btn" onclick="resetUnit()" title="Clear all answers for this unit">↺ Reset This Unit</button>
+      <button class="reset-btn reset-all" onclick="resetAll()" title="Clear all answers across every unit">⚠ Reset Everything</button>
+    </div>
   `;
 
   if (currentQuestions.length === 0) {
@@ -1947,6 +1979,54 @@ function flipCard() {
 // ============================================================
 // NAVIGATION
 // ============================================================
+// ============================================================
+// RESET FUNCTIONS
+// ============================================================
+
+function resetType() {
+  if (!confirm(`Reset scores for "${currentQType === 'all' ? 'All' : currentQType}" questions in this unit?`)) return;
+  const filtered = getFilteredQuestions();
+  // Remove only the answeredMap entries for questions in the current filtered set
+  // We need to find the original indices
+  const allQs = UNITS[currentUnit].questions;
+  filtered.forEach(q => {
+    const origIdx = allQs.indexOf(q);
+    if (origIdx !== -1) {
+      const entry = answeredMap[origIdx];
+      if (entry) {
+        if (entry.correct) sessionCorrect--;
+        sessionAnswered--;
+        delete answeredMap[origIdx];
+      }
+    }
+  });
+  currentQIndex = 0;
+  renderUnitContent();
+}
+
+function resetUnit() {
+  if (!confirm(`Reset all scores for "${UNITS[currentUnit].name}"?`)) return;
+  // Remove all entries in answeredMap (unit-scoped per selectUnit)
+  const count = Object.values(answeredMap).length;
+  const correct = Object.values(answeredMap).filter(e => e.correct).length;
+  sessionCorrect -= correct;
+  sessionAnswered -= count;
+  if (sessionCorrect < 0) sessionCorrect = 0;
+  if (sessionAnswered < 0) sessionAnswered = 0;
+  answeredMap = {};
+  currentQIndex = 0;
+  renderUnitContent();
+}
+
+function resetAll() {
+  if (!confirm("Reset ALL scores across every unit? This cannot be undone.")) return;
+  sessionCorrect = 0;
+  sessionAnswered = 0;
+  answeredMap = {};
+  currentQIndex = 0;
+  renderUnitContent();
+}
+
 function filterType(type) {
   currentQType = type;
   currentQIndex = 0;
