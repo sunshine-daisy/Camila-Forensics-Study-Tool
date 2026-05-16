@@ -2326,7 +2326,7 @@ async function submitRequest() {
 window.addEventListener('load', () => {
   const cached = localStorage.getItem(CODE_CACHE_KEY);
   if (cached) {
-    // Still verify against sheet in background (in case code was revoked)
+    // Verify cached code against sheet — only bypass screen if confirmed valid
     fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(cached))
       .then(r => r.json())
       .then(json => {
@@ -2334,13 +2334,15 @@ window.addEventListener('load', () => {
           if (json.name) localStorage.setItem('forensics_student_name', json.name);
           onCodeValid(json.name || localStorage.getItem('forensics_student_name'));
         } else {
+          // Code revoked or invalid — clear and show code screen
           localStorage.removeItem(CODE_CACHE_KEY);
+          localStorage.removeItem('forensics_student_name');
         }
       })
       .catch(() => {
-        // Network/CORS error — trust the cached code
-        const cachedName = localStorage.getItem('forensics_student_name');
-        onCodeValid(cachedName);
+        // Network/CORS error — show code screen, let user re-enter
+        // Don't auto-bypass so we don't lock people out silently
+        localStorage.removeItem(CODE_CACHE_KEY);
       });
   }
 });
