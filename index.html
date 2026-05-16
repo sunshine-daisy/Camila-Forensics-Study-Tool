@@ -2200,39 +2200,6 @@ function showScreen(id) {
 const CODE_CACHE_KEY = 'forensics_access_code';
 
 // JSONP-style code check — works around CORS limitations with Apps Script
-function checkCodeViaScript(code) {
-  return new Promise((resolve, reject) => {
-    const callbackName = 'codeCheck_' + Date.now();
-    const timeout = setTimeout(() => {
-      delete window[callbackName];
-      if (document.getElementById('jsonp-script')) {
-        document.getElementById('jsonp-script').remove();
-      }
-      reject(new Error('timeout'));
-    }, 8000);
-
-    window[callbackName] = function(json) {
-      clearTimeout(timeout);
-      delete window[callbackName];
-      if (document.getElementById('jsonp-script')) {
-        document.getElementById('jsonp-script').remove();
-      }
-      // Return both valid flag AND name linked to the code
-      resolve({ valid: json.valid === true, name: json.name || null });
-    };
-
-    const script = document.createElement('script');
-    script.id = 'jsonp-script';
-    script.src = APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(code) + '&callback=' + callbackName;
-    script.onerror = () => {
-      clearTimeout(timeout);
-      delete window[callbackName];
-      reject(new Error('script error'));
-    };
-    document.head.appendChild(script);
-  });
-}
-
 async function validateCode() {
   const input = document.getElementById('code-input');
   const code = input.value.trim().toUpperCase();
@@ -2241,7 +2208,8 @@ async function validateCode() {
   // Check localStorage cache first
   const cached = localStorage.getItem(CODE_CACHE_KEY);
   if (cached === code) {
-    onCodeValid();
+    const cachedName = localStorage.getItem('forensics_student_name');
+    onCodeValid(cachedName);
     return;
   }
 
@@ -2250,20 +2218,25 @@ async function validateCode() {
   btn.disabled = true;
 
   try {
-    // Use script tag injection (JSONP-style) to bypass CORS for code verification
-    // This works reliably with Apps Script regardless of CORS settings
-    const result = await checkCodeViaScript(code);
-    if (result.valid) {
+    const url = APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(code);
+    const res = await fetch(url);
+    const json = await res.json();
+
+    if (json.valid) {
       localStorage.setItem(CODE_CACHE_KEY, code);
-      // Also cache the linked name so returning users are auto-identified
-      if (result.name) localStorage.setItem('forensics_student_name', result.name);
-      onCodeValid(result.name);
+      if (json.name) localStorage.setItem('forensics_student_name', json.name);
+      onCodeValid(json.name || null);
     } else {
       showCodeError();
     }
   } catch(e) {
-    if (cached) { onCodeValid(); return; }
-    document.getElementById('code-error').textContent = '⚠️ Could not reach server. Check your connection and try again.';
+    // Network/CORS error — if we have a cached code already, trust it
+    if (cached) {
+      const cachedName = localStorage.getItem('forensics_student_name');
+      onCodeValid(cachedName);
+      return;
+    }
+    document.getElementById('code-error').textContent = '⚠️ Could not reach the server. Please check your connection.';
     document.getElementById('code-error').classList.add('show');
     document.getElementById('code-actions').style.display = 'flex';
   } finally {
@@ -2354,19 +2327,18 @@ window.addEventListener('load', () => {
   const cached = localStorage.getItem(CODE_CACHE_KEY);
   if (cached) {
     // Still verify against sheet in background (in case code was revoked)
-    // Use JSONP for background check too
-    checkCodeViaScript(cached)
-      .then(result => {
-        if (result.valid) {
-          if (result.name) localStorage.setItem('forensics_student_name', result.name);
-          onCodeValid(result.name);
+    fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(cached))
+      .then(r => r.json())
+      .then(json => {
+        if (json.valid) {
+          if (json.name) localStorage.setItem('forensics_student_name', json.name);
+          onCodeValid(json.name || localStorage.getItem('forensics_student_name'));
         } else {
-          // Code was revoked — clear cache, force re-entry
           localStorage.removeItem(CODE_CACHE_KEY);
         }
       })
       .catch(() => {
-        // Network error — trust cached code, use cached name
+        // Network/CORS error — trust the cached code
         const cachedName = localStorage.getItem('forensics_student_name');
         onCodeValid(cachedName);
       });
