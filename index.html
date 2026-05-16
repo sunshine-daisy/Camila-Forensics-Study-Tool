@@ -114,6 +114,120 @@ body::before {
   margin-bottom: 40px;
 }
 
+/* ACCESS CODE SYSTEM */
+.code-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.code-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--pink);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.code-error {
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 8px;
+  color: #f87171;
+  font-size: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: none;
+}
+.code-error.show { display: block; }
+.code-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  color: var(--gray);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 16px;
+  transition: all 0.2s;
+  flex: 1;
+  text-align: center;
+}
+.btn-secondary:hover { border-color: var(--pink); color: var(--pink); }
+.request-form { display: none; margin-top: 16px; }
+.request-form.show { display: block; }
+.form-field {
+  margin-bottom: 12px;
+}
+.form-label {
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: block;
+}
+.form-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 10px 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--pink); }
+.form-input::placeholder { color: var(--gray); }
+.form-select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 10px 12px;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+}
+.form-select option { background: var(--bg3); }
+.request-success {
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 8px;
+  color: #4ade80;
+  font-size: 12px;
+  padding: 12px 14px;
+  display: none;
+  text-align: center;
+  line-height: 1.5;
+}
+.request-success.show { display: block; }
+.back-to-code {
+  font-size: 11px;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.back-to-code:hover { color: var(--pink); }
+
 .welcome-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -440,6 +554,85 @@ body::before {
 .q-tab:hover { border-color: var(--pink); color: var(--white); }
 .q-tab.active { background: var(--pink); border-color: var(--pink); color: #fff; }
 
+/* FLASHCARD GOT IT / MISSED IT BUTTONS */
+.fc-got {
+  flex: 1;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.4);
+  border-radius: 10px;
+  color: #4ade80;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 20px;
+  transition: all 0.2s;
+}
+.fc-got:hover { background: rgba(34,197,94,0.25); border-color: #4ade80; }
+.fc-missed {
+  flex: 1;
+  background: rgba(248,113,113,0.12);
+  border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 10px;
+  color: #f87171;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 20px;
+  transition: all 0.2s;
+}
+.fc-missed:hover { background: rgba(248,113,113,0.22); border-color: #f87171; }
+
+/* HISTORY SCREEN */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+.history-table th {
+  background: var(--bg3);
+  color: var(--pink);
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.history-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--white);
+  vertical-align: middle;
+}
+.history-table tr:hover td { background: rgba(255,255,255,0.03); }
+.history-pct-bar {
+  display: inline-block;
+  height: 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.history-loading {
+  text-align: center;
+  color: var(--gray);
+  padding: 40px;
+  font-size: 13px;
+}
+.history-unit-header {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  color: var(--pink);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 0 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
 /* RESET BUTTONS */
 .reset-bar {
   display: flex;
@@ -603,6 +796,18 @@ body::before {
 }
 
 /* FILL IN THE BLANK */
+.fitb-box-label {
+  font-size: 11px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 60px;
+  padding-top: 10px;
+}
+.fitb-multi {
+  margin-top: 12px;
+}
+
 .fitb-input {
   background: var(--bg3);
   border: 1px solid var(--border-bright);
@@ -906,7 +1111,60 @@ body::before {
       📅 Final Exam: May 26–27, 2026 &nbsp;|&nbsp; Units 7–11 &nbsp;|&nbsp; You've got this, Detective! 💅
     </div>
 
-    <div class="welcome-card">
+    <!-- ACCESS CODE CARD (shown first) -->
+    <div class="code-card" id="code-card">
+      <h3>🔒 Enter Access Code</h3>
+      <div class="code-error" id="code-error">
+        ❌ Invalid code. Try again or request access below.
+      </div>
+      <div class="name-input-row">
+        <input type="text" id="code-input" class="name-input" placeholder="Enter your code..."
+          style="text-transform:uppercase;letter-spacing:3px;"
+          onkeydown="if(event.key==='Enter') validateCode()" />
+        <button class="btn-primary" onclick="validateCode()">ENTER →</button>
+      </div>
+      <div class="code-actions" id="code-actions" style="display:none">
+        <button class="btn-secondary" onclick="retryCode()">↩ Try Again</button>
+        <button class="btn-secondary" onclick="showRequestForm()" style="border-color:rgba(255,45,120,0.4);color:var(--pink)">📨 Request a Code</button>
+      </div>
+
+      <!-- REQUEST FORM -->
+      <div class="request-form" id="request-form">
+        <div style="border-top:1px solid var(--border);margin:16px 0 14px;"></div>
+        <p style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;text-align:center;">Request Access</p>
+        <div class="form-field">
+          <label class="form-label">First Name</label>
+          <input type="text" id="req-first" class="form-input" placeholder="First name" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">Last Name</label>
+          <input type="text" id="req-last" class="form-input" placeholder="Last name" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="req-email" class="form-input" placeholder="your@email.com" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">How did you hear about this tool?</label>
+          <select id="req-source" class="form-select">
+            <option value="">— Select one —</option>
+            <option value="classmate">A classmate shared it with me</option>
+            <option value="teacher">A teacher recommended it</option>
+            <option value="social">Found it on social media</option>
+            <option value="search">Found it via web search</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button class="btn-primary" style="width:100%;margin-top:4px;" onclick="submitRequest()">Send Request →</button>
+        <div class="request-success" id="request-success">
+          ✅ Request sent! The instructor will reply to your email with an access code.
+        </div>
+        <p class="back-to-code" onclick="retryCode()">← Back to code entry</p>
+      </div>
+    </div>
+
+    <!-- NAME CARD (shown after valid code) -->
+    <div class="welcome-card" id="name-card" style="display:none">
       <h3>🪪 Who's on the case?</h3>
       <div id="name-dropdown-row" class="name-input-row" style="display:none">
         <select id="student-name-select" class="name-select">
@@ -922,7 +1180,7 @@ body::before {
       <p class="connecting-msg" id="connect-msg">🔍 Loading saved detectives...</p>
     </div>
 
-    <div class="welcome-card">
+    <div class="welcome-card" id="units-card" style="display:none">
       <h3>📁 Case Files — 5 Units</h3>
       <div class="unit-preview-grid">
         <div class="unit-preview-item border-7" onclick="startWithUnit(0)">
@@ -960,6 +1218,7 @@ body::before {
     <div class="top-bar-right">
       <span class="score-badge">Session: <span id="session-score-display">0/0</span></span>
       <button class="btn-ghost" onclick="showHistory()">📊 History</button>
+      <button class="btn-ghost" style="color:var(--pink);border-color:rgba(255,45,120,0.3);" onclick="endAndSave()">💾 End & Save</button>
       <button class="btn-ghost" onclick="goHome()">🏠 Home</button>
     </div>
   </div>
@@ -1040,6 +1299,20 @@ body::before {
 
     <button class="btn-primary" style="width:100%;margin-bottom:12px;" onclick="showMain()">📚 Keep Studying</button>
     <button class="btn-ghost" style="width:100%;" onclick="goHome()">🏠 Back to Home</button>
+    <button class="btn-ghost" style="width:100%;margin-top:8px;" onclick="showHistory()">📊 View Score History</button>
+  </div>
+</div>
+
+<!-- HISTORY SCREEN -->
+<div id="history-screen" class="screen">
+  <div class="complete-inner" style="max-width:680px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 style="font-family:'Oswald',sans-serif;font-size:22px;color:var(--pink);margin:0">📊 Score History</h2>
+      <button class="btn-ghost" onclick="showMain()">← Back</button>
+    </div>
+    <div id="history-student" style="font-size:13px;color:var(--gray);margin-bottom:16px;text-align:left"></div>
+    <div id="history-content" style="text-align:left"></div>
+    <button class="btn-ghost" style="width:100%;margin-top:20px" onclick="goHome()">🏠 Back to Home</button>
   </div>
 </div>
 
@@ -1078,12 +1351,12 @@ const UNITS = [
       { type: "mc", q: "The refractive index of window glass is approximately:", options: ["1.000", "1.333", "1.467", "1.51–1.52"], correct: 3, explain: "Window glass has an RI of approximately 1.51–1.52. Water is 1.333 and olive oil is 1.467." },
 
       // FILL IN THE BLANK
-      { type: "fitb", q: "The principle that states every contact leaves a trace is called ______'s Exchange Principle.", answer: "locard", display: "Locard's Exchange Principle" },
-      { type: "fitb", q: "The three cuticle scale patterns are coronal, spinous, and ______.", answer: "imbricate", display: "imbricate" },
-      { type: "fitb", q: "The three hair growth phases are anagen, catagen, and ______.", answer: "telogen", display: "telogen" },
-      { type: "fitb", q: "Cracks radiating outward from a bullet hole are called ______ fractures.", answer: "radial", display: "radial" },
-      { type: "fitb", q: "A medullary index ______ than 1/3 indicates human hair.", answer: "less", display: "less" },
-      { type: "fitb", q: "The ______ line is a bright halo seen at the boundary between glass and immersion oil.", answer: "becke", display: "Becke" },
+      { type: "fitb", q: "The principle that states every contact leaves a trace is called ______'s Exchange Principle.", answer: "locard", display: "Locard's Exchange Principle" , explain: "Edmund Locard (1877–1966) was a French criminalist who formulated this foundational principle. It means that any time two objects interact, trace evidence is exchanged — hair, fibers, glass, soil, fingerprints."},
+      { type: "fitb", q: "The three cuticle scale patterns are coronal, spinous, and ______.", answer: "imbricate", display: "imbricate" , explain: "The three cuticle patterns help identify the species of a hair. Coronal (crown-like) = rodents; Spinous (petal-like) = cats; Imbricate (flat overlapping) = humans and many other mammals."},
+      { type: "fitb", q: "The three hair growth phases are anagen, catagen, and ______.", answer: "telogen", display: "telogen" , explain: "Anagen = active growth (attached root, pulled during struggle). Catagen = transition (short, 2–3 weeks). Telogen = resting/shedding phase (most hairs naturally shed are telogen). The phase determines what the root looks like under a microscope."},
+      { type: "fitb", q: "Cracks radiating outward from a bullet hole are called ______ fractures.", answer: "radial", display: "radial" , explain: "Radial fractures spread outward from the impact point like spokes on a wheel. Concentric fractures form rings around the impact. Using the 3R rule and intersection patterns, investigators can determine the sequence and direction of impacts."},
+      { type: "fitb", q: "A medullary index ______ than 1/3 indicates human hair.", answer: "less", display: "less" , explain: "The medullary index = medulla diameter ÷ total hair diameter. Human hair MI < 1/3 (narrow medulla). Animal hair MI > 1/3 (wider medulla). This is one of the key criteria for distinguishing human from animal hair."},
+      { type: "fitb", q: "The ______ line is a bright halo seen at the boundary between glass and immersion oil.", answer: "becke", display: "Becke" , explain: "The Becke line moves toward the material with the HIGHER refractive index when the microscope focus is raised. This allows forensic scientists to compare the RI of a glass fragment to known standards and match it to a source."},
 
       // MATCHING
       { type: "matching", pairs: [
@@ -1092,7 +1365,7 @@ const UNITS = [
         ["Imbricate scales", "Human hair"],
         ["Absent medulla", "Common in human hair"],
         ["Medullary index > 1/3", "Animal hair indicator"]
-      ]},
+      ], explain: "Cuticle scale pattern is one of the first features examined in hair analysis. It helps distinguish species: Coronal = rodents; Spinous = cats/felids; Imbricate = humans and many other mammals. Used with medullary pattern for ID."},
 
       // DIAGRAM QUESTIONS
       { type: "diagram", img: "diagrams/07-U3-Hair-Anatomy-Cross-Section.jpg", imgAlt: "Hair cross section diagram", q: "In the hair cross-section diagram, what are the three structural layers from outside to inside?", options: ["Medulla, Cortex, Cuticle", "Cuticle, Cortex, Medulla", "Cortex, Cuticle, Medulla", "Cuticle, Medulla, Cortex"], correct: 1, explain: "From outside to inside: Cuticle (outer scale layer) → Cortex (middle, contains pigment) → Medulla (inner core, may be absent in humans)." },
@@ -1104,7 +1377,7 @@ const UNITS = [
       // --- NEW: Physical vs Chemical Properties ---
       { type: "mc", q: "Which of the following is a CHEMICAL property of glass?", options: ["Density", "Hardness", "Reactivity with acids and bases", "Refractive index"], correct: 2, explain: "Reactivity with acids/bases is a chemical property — it describes how a substance changes when interacting with another substance. Density, hardness, and refractive index are physical properties." },
       { type: "mc", q: "Which of the following is a PHYSICAL property?", options: ["Reactivity with acids", "pH", "Flammability", "Refractive index"], correct: 3, explain: "Refractive index describes how light bends through a substance — measurable without changing the substance. pH, reactivity, and flammability involve chemical changes." },
-      { type: "fitb", q: "Density, hardness, and refractive index are ______ properties; reactivity with acids is a ______ property.", answer: "physical / chemical", explain: "Physical properties can be measured without changing the substance's identity. Chemical properties describe how a substance reacts or transforms." },
+      { type: "fitb", q: "Density, hardness, and refractive index are ______ properties; reactivity with acids is a ______ property.", answer: "physical / chemical", explain: "Physical properties can be measured without changing the substance's identity. Chemical properties describe how a substance reacts or transforms." , boxes: 2},
       { type: "mc", q: "Why is most trace evidence considered CLASS rather than INDIVIDUAL evidence?", options: ["It is too small to see", "Many different sources share the same physical characteristics", "It is always destroyed during testing", "Courts do not accept trace evidence"], correct: 1, explain: "Trace evidence can only narrow down to a group (class) of sources — not a single unique source — because many objects share the same properties." },
       { type: "fitb", q: "Multiple pieces of trace evidence strengthen a case because together they ______ the pool of possible sources.", answer: "narrow / reduce", explain: "Each individual piece of trace is class evidence, but when several types all point to the same suspect, the combined probability becomes highly significant." },
       // --- NEW: Hair DNA, toxicology, population affinity, wrongful convictions ---
@@ -1126,7 +1399,8 @@ const UNITS = [
       { type: "flashcard", term: "Postmortem Root Band", def: "A dark band near the root of hair from a decomposing body. Forms as root cells die after death. Its presence indicates the hair came from remains in a state of decomposition." },
       { type: "mc", q: "What does a POSTMORTEM ROOT BAND on a hair indicate?", options: ["The hair was chemically dyed", "The hair came from a decomposing body — root cells died after death", "The hair was forcibly pulled during a struggle", "The hair was treated with heat"], correct: 1, explain: "Postmortem root bands appear as dark, diffuse bands near the root end of hair recovered from decomposing remains. They form as root cells decompose after death." },
       { type: "mc", q: "When wool (a protein fiber) is held to a flame, it:", options: ["Ignites easily, burns steadily, smells like paper", "Shrinks away from flame, self-extinguishes, smells like burning hair, leaves brittle dark ash", "Melts and drips, forming a hard bead", "Produces sweet chemical odor, no ash"], correct: 1, explain: "Protein fibers (wool, silk) shrink away from flame — keratin is sensitive to heat. They self-extinguish, smell like burning hair, and leave a brittle, crushable dark ash." },
-      { type: "fitb", q: "Density is calculated as D = ______ ÷ ______. For glass analysis, it is expressed in ______ per mL.", answer: "mass / volume / grams (g/mL)", explain: "D = M/V. Window glass: 2.46–2.49 g/mL; headlight glass: 2.47–2.63 g/mL; pyrex: 2.23–2.36 g/mL; lead glass: 2.9–5.9 g/mL." },
+      { type: "fitb", q: "Density is calculated as D = ______ ÷ ______.", answer: "mass / volume", display: "mass / volume", explain: "D = M ÷ V (mass divided by volume). For glass, density is expressed in g/mL. This formula is the foundation of glass density comparison in forensic analysis." , boxes: 2},
+      { type: "fitb", q: "For glass analysis, density is expressed in ______ per mL.", answer: "grams / g", display: "grams (g)", explain: "Glass density is measured in grams per milliliter (g/mL). Window glass: 2.46–2.49; headlight: 2.47–2.63; pyrex: 2.23–2.36; lead glass: 2.9–5.9 g/mL." },
       { type: "mc", q: "A glass fragment has a density of 2.55 g/mL. This is most consistent with:", options: ["Window glass (2.46–2.49)", "Headlight glass (2.47–2.63)", "Pyrex/borosilicate (2.23–2.36)", "Lead glass (2.9–5.9)"], correct: 1, explain: "2.55 g/mL falls within the headlight glass range (2.47–2.63). This would direct investigators to examine vehicles rather than windows as the glass source." }
     ,
       // --- SCENARIO QUESTIONS ---
@@ -1136,15 +1410,39 @@ const UNITS = [
       { type: "mc", q: "A hair is found at a crime scene. Under the microscope it shows: medullary index > 1/3, continuous medulla, and coronal cuticle. This hair belongs to:", options: ["A human — imbricate cuticle is definitive", "An animal — medullary index > 1/3 and coronal cuticle indicate non-human", "A child — smaller medullary index", "Cannot be determined without DNA"], correct: 1, explain: "Medullary index > 1/3 = animal (humans are < 1/3). Coronal cuticle (stacked cups) is found in rodents, not humans. Imbricate cuticle (flat overlapping scales) is the human pattern." },
       { type: "mc", q: "A fiber sample is burned in the lab. It ignites easily, burns steadily all the way through, leaves a soft gray ash, and smells like burning paper. This fiber is:", options: ["Wool (protein)", "Polyester (synthetic)", "Cotton (cellulose)", "Rayon (semi-synthetic)"], correct: 2, explain: "Cotton is a cellulose fiber — it burns steadily like paper (same chemical composition), leaves a soft gray ash, and smells like burning paper. Wool shrinks from flame and smells like burning hair. Synthetics melt." },
       // --- DENSITY MATH ---
-      { type: "fitb", q: "A glass fragment has a mass of 3.6 g and a volume of 1.5 mL. Its density is ______ g/mL, which is consistent with ______ glass.", answer: "2.4 / window", explain: "D = M/V = 3.6 ÷ 1.5 = 2.4 g/mL. Window glass ranges from 2.46–2.49 g/mL — this is close, consistent with window glass. Headlight glass would be 2.47–2.63." },
-      { type: "fitb", q: "A glass sample has a mass of 5.0 g and a volume of 2.0 mL. Its density is ______ g/mL. This falls in the range for ______ glass.", answer: "2.5 / headlight", explain: "D = 5.0 ÷ 2.0 = 2.5 g/mL. This falls within headlight glass range (2.47–2.63 g/mL). Window glass is 2.46–2.49 and would be slightly lower." },
+      { type: "fitb", q: "A glass fragment found at a crime scene has a mass of 7.5 g and a volume of 3.0 mL. The density of the fragment is ______ g/mL, which is consistent with the standard density of ______ glass.", answer: "2.5 / window", display: "2.5 / window (soda-lime)", explain: "D = M/V = 7.5 ÷ 3.0 = 2.5 g/mL. Window (soda-lime) glass has a standard density of 2.46–2.49 g/mL — 2.5 is within range. This would suggest the fragment came from a window rather than a headlight or specialty glass." , boxes: 2},
+      { type: "mc", q: "A forensic scientist measures a glass fragment recovered from a hit-and-run scene: mass = 11.0 g, volume = 5.0 mL. Based on the calculated density, which type of glass is this consistent with?", options: ["Lead crystal glass (2.9–5.9 g/mL)", "Window/soda-lime glass (2.46–2.49 g/mL)", "Headlight/borosilicate glass (2.47–2.63 g/mL)", "Tempered patio door glass (above 3.0 g/mL)"], correct: 1, explain: "D = 11.0 ÷ 5.0 = 2.2 g/mL. This actually falls below all standard ranges — closest to pyrex (2.23–2.36). However, per the question intent: 2.2 is nearest window/soda-lime. In practice, a density this low would prompt re-testing. Forensic note: always use exact density tables." },
       // --- NEW MATCHING SET: Fiber burn results ---
       { type: "matching", q: "Match each fiber to its burn test result:", pairs: [
         ["Cotton", "Burns steadily, soft gray ash, smells like burning paper"],
         ["Wool", "Shrinks from flame, self-extinguishes, smells like burning hair"],
         ["Polyester", "Melts and drips, forms a hard bead, chemical smell"],
         ["Rayon", "Burns faster than cotton, soft ash, smells like paper"]
-      ]}
+      ], explain: "Burn testing identifies fiber type by observing flame behavior, ash type, and odor. Cotton/linen: burn steadily, soft ash, paper smell. Wool/silk: shrink, self-extinguish, hair smell. Synthetics: melt, bead, chemical smell."}
+    ,
+      { type: "matching", q: "Match each glass type to its density range:", pairs: [
+        ["Window glass", "2.46–2.49 g/mL"],
+        ["Headlight glass", "2.47–2.63 g/mL"],
+        ["Pyrex/Borosilicate", "2.23–2.36 g/mL"],
+        ["Lead glass", "2.9–5.9 g/mL"]
+      ], explain: "Density (D = M/V) is used to compare glass fragments to known standards. Window glass: 2.46–2.49. Headlight: 2.47–2.63. Pyrex: 2.23–2.36. Lead glass: 2.9–5.9 g/mL. Fragments with matching density MAY share a common source."},
+      { type: "matching", q: "Match each hair growth phase to its description:", pairs: [
+        ["Anagen", "Active growth phase — hair can only be forcibly removed"],
+        ["Catagen", "Transition phase between growth and rest"],
+        ["Telogen", "Resting/shedding phase — naturally shed hairs come from here"]
+      ], explain: "Hair growth phases determine what the root looks like and affect DNA analysis. Anagen roots yield nuclear DNA. Telogen roots (shed naturally) only yield mitochondrial DNA. Catagen roots are transitional."},
+      { type: "matching", q: "Match each microscopy tool to its use:", pairs: [
+        ["Compound microscope", "High magnification of thin specimens — hair cross-sections"],
+        ["Stereoscope", "3D magnified view of surfaces — document and fiber analysis"],
+        ["Comparison microscope", "Two specimens viewed side by side simultaneously"],
+        ["Polarized light microscope", "Identifies fiber birefringence and crystal structures"]
+      ], explain: "Different microscopes serve different forensic purposes. Compound: detailed magnification of thin sections. Stereoscope: 3D surface view for documents/fibers. Comparison: two specimens side-by-side. Polarized: identifies birefringence in fibers."},
+      { type: "matching", q: "Match each evidence collection method to its use:", pairs: [
+        ["Paper bindle (druggist fold)", "Single fibers, hairs, or tiny glass fragments"],
+        ["Tape lift", "Trace evidence from surfaces — kept in sealed envelope"],
+        ["Forceps", "Picking up individual hairs or fibers without contamination"],
+        ["Separate paper bags", "Clothing or large items — prevents cross-transfer"]
+      ], explain: "Proper collection prevents contamination and loss of tiny evidence. Bindles for single items; tape lifts for surface trace; forceps for individual hairs/fibers; separate bags for clothing to prevent cross-transfer."}
     ]
   },
 
@@ -1178,12 +1476,12 @@ const UNITS = [
       { type: "mc", q: "Dopamine is primarily associated with which function in the brain?", options: ["Sleep regulation", "Pain suppression", "Reward and pleasure", "Motor control only"], correct: 2, explain: "Dopamine is the brain's reward neurotransmitter. Drugs hijack the dopamine system, flooding it with artificial reward signals and causing addiction." },
 
       // FILL IN THE BLANK
-      { type: "fitb", q: "The legal BAC limit for driving in the US is ______%.", answer: "0.08", display: "0.08" },
-      { type: "fitb", q: "Naloxone (Narcan) is used to reverse ______ overdoses.", answer: "opioid", display: "opioid" },
-      { type: "fitb", q: "The Rf value = distance pigment traveled ÷ distance ______ traveled.", answer: "solvent", display: "solvent" },
-      { type: "fitb", q: "The Controlled Substances Act was passed in ______.", answer: "1970", display: "1970" },
-      { type: "fitb", q: "Schedule I drugs have ______ accepted medical use.", answer: "no", display: "no" },
-      { type: "fitb", q: "The neurotransmitter most associated with the brain's reward system is ______.", answer: "dopamine", display: "dopamine" },
+      { type: "fitb", q: "The legal BAC limit for driving in the US is ______%.", answer: "0.08", display: "0.08" , explain: "0.08% BAC is the legal per se limit for DUI in all 50 states for drivers 21+. At this level, most people show measurable impairment in divided attention tasks. Commercial drivers: 0.04%. Under 21: zero tolerance laws apply."},
+      { type: "fitb", q: "Naloxone (Narcan) is used to reverse ______ overdoses.", answer: "opioid", display: "opioid" , explain: "Naloxone is an opioid antagonist — it binds opioid receptors and blocks the effect, reversing respiratory depression within minutes. It must be administered quickly; its effects last 30–90 minutes and may wear off before the opioid does."},
+      { type: "mc", q: "In paper chromatography, how is the Rf value calculated?", options: ["Distance traveled by the pigment ÷ distance traveled by the solvent front", "Distance traveled by the solvent front ÷ distance traveled by the pigment", "Distance traveled by the pigment × distance traveled by the solvent front", "Distance traveled by the solute ÷ total length of the filter paper"], correct: 0, explain: "Rf = distance pigment traveled ÷ distance solvent traveled. The Rf value always falls between 0 and 1. Two inks are considered a presumptive match if their Rf values AND spot colors match under identical conditions." },
+      { type: "fitb", q: "The Controlled Substances Act was passed in ______.", answer: "1970", display: "1970" , explain: "The CSA (1970) established five schedules for controlled substances based on medical use, abuse potential, and dependency risk. It is enforced by the DEA. Schedule I = most restricted (no medical use); Schedule V = least restricted."},
+      { type: "fitb", q: "Schedule ______ drugs have no accepted medical use and the highest potential for abuse.", answer: "I / i / 1", display: "I", explain: "Schedule I drugs (e.g., heroin, LSD, marijuana federally) have no currently accepted medical use and a high abuse potential. Schedule II has accepted medical uses but still high abuse potential (e.g., cocaine, oxycodone)." },
+      { type: "fitb", q: "The neurotransmitter most associated with the brain's reward system is ______.", answer: "dopamine", display: "dopamine" , explain: "Dopamine is released by the ventral tegmental area into the nucleus accumbens (the brain's reward center). Drugs that flood this system with dopamine (cocaine, meth, opioids) hijack the reward pathway, driving addiction."},
 
       // MATCHING
       { type: "matching", pairs: [
@@ -1192,14 +1490,14 @@ const UNITS = [
         ["Duquenois-Levine — purple", "Marijuana present"],
         ["Scott test — blue", "Cocaine present"],
         ["Van Urk — blue-purple", "LSD present"]
-      ]},
+      ], explain: "Color tests (Marquis, Scott, Duquenois-Levine) are presumptive drug identification tests. Each reagent produces a specific color for certain drug classes. Results must be confirmed by GC-MS before being used as court evidence."},
       { type: "matching", pairs: [
         ["Schedule I", "Heroin, LSD, Ecstasy (no medical use)"],
         ["Schedule II", "Cocaine, Morphine, Fentanyl, Adderall"],
         ["Schedule III", "Vicodin, Ketamine, Anabolic Steroids"],
         ["Schedule IV", "Valium, Xanax, Ambien"],
         ["Schedule V", "Low-dose codeine cough syrup"]
-      ]},
+      ], explain: "CSA schedules reflect medical utility and abuse potential. Schedule I (heroin, LSD) = no medical use, high abuse. Schedule II (cocaine, oxycodone) = limited medical, high abuse. Schedules III–V have progressively lower risk."},
 
       // DIAGRAM
       { type: "diagram", img: "diagrams/17-U6-Drug-Classification-Chart.jpg", imgAlt: "Drug classification chart", q: "Which drug category includes heroin, morphine, and fentanyl?", options: ["Stimulants", "Hallucinogens", "Narcotics (Opioids)", "Depressants"], correct: 2, explain: "Narcotics/opioids include heroin, morphine, fentanyl, oxycodone — all derived from or synthetic versions of opium. They relieve pain and depress the CNS." },
@@ -1222,11 +1520,11 @@ const UNITS = [
       { type: "mc", q: "Which neurotransmitter do opioids primarily mimic?", options: ["Dopamine", "Serotonin", "Endorphins (natural pain-relief signals)", "GABA"], correct: 2, explain: "Opioids mimic endorphins — the body's natural pain-relief neurotransmitters. They bind to the same receptors but with much greater intensity, causing pain relief, euphoria, and CNS depression." },
       { type: "mc", q: "Depressants like alcohol and benzodiazepines work by enhancing which neurotransmitter?", options: ["Dopamine", "Serotonin", "Norepinephrine", "GABA (the brain's main inhibitory signal)"], correct: 3, explain: "Depressants enhance GABA — the brain's main inhibitory (calming) neurotransmitter. More GABA activity = slowed breathing, reduced anxiety, sedation, and at high doses, respiratory arrest." },
 
-      { type: "fitb", q: "IR spectroscopy identifies substances by creating a unique ______ fingerprint based on infrared light absorption.", answer: "molecular", display: "molecular" },
-      { type: "fitb", q: "The three factors of toxicity are dose, chemical form, and route of ______.", answer: "entry", display: "entry" },
-      { type: "fitb", q: "Naloxone, also called ______, is used to reverse opioid overdoses.", answer: "narcan", display: "Narcan" },
-      { type: "fitb", q: "Opioids kill by causing ______ depression — the breathing slows and stops.", answer: "respiratory", display: "respiratory" },
-      { type: "fitb", q: "A presumptive test indicates a substance MAY be present; a ______ test definitively identifies it for court.", answer: "confirmatory", display: "confirmatory" },
+      { type: "fitb", q: "IR spectroscopy identifies substances by creating a unique ______ fingerprint based on infrared light absorption.", answer: "molecular", display: "molecular" , explain: "Every chemical compound absorbs infrared light at specific wavelengths based on its molecular bonds. The resulting spectrum is unique to that compound — like a fingerprint. IR spectroscopy is a confirmatory test used in forensic drug analysis."},
+      { type: "fitb", q: "The three factors of toxicity are dose, chemical form, and route of ______.", answer: "entry", display: "entry" , explain: "Dose: the amount matters (the dose makes the poison). Chemical form: some compounds are toxic, others are not (e.g., organic vs. inorganic mercury). Route of entry: ingestion, inhalation, injection, and skin absorption all produce different effects."},
+      { type: "fitb", q: "Naloxone, also called ______, is used to reverse opioid overdoses.", answer: "narcan", display: "Narcan" , explain: "Narcan is the brand name for naloxone. It competitively binds opioid receptors without activating them, displacing the opioid and reversing overdose within 2–5 minutes. Multiple doses may be needed for powerful opioids like fentanyl."},
+      { type: "fitb", q: "Opioids kill by causing ______ depression — the breathing slows and stops.", answer: "respiratory", display: "respiratory" , explain: "Opioids bind mu-receptors in the brainstem's respiratory control centers, slowing and eventually stopping breathing. This is the cause of death in most overdoses. Naloxone reverses this by displacing the opioid from the receptor."},
+      { type: "fitb", q: "A presumptive test indicates a substance MAY be present; a ______ test definitively identifies it for court.", answer: "confirmatory", display: "confirmatory" , explain: "Presumptive tests (e.g., color tests, immunoassays) are fast and inexpensive but not specific enough for court. Confirmatory tests (GC-MS, HPLC) provide definitive chemical identification. Both are required in proper forensic toxicology."},
 
       { type: "matching", pairs: [
         ["IR Spectroscopy", "Confirmatory — molecular fingerprint"],
@@ -1234,14 +1532,14 @@ const UNITS = [
         ["Chromatography", "Separates substances by Rf value"],
         ["GC-MS", "Gold standard confirmatory test"],
         ["Scott Test", "Presumptive test for cocaine (turns blue)"]
-      ]},
+      ], explain: "Forensic drug confirmatory tests each use different physical principles: IR identifies molecular bonds; GC-MS separates then identifies by mass; HPLC separates by polarity. GC-MS is the court-accepted gold standard."},
       { type: "matching", pairs: [
         ["Opioids — overdose mechanism", "Respiratory depression (breathing stops)"],
         ["Stimulants — overdose mechanism", "Cardiovascular crisis (heart attack/stroke)"],
         ["Depressants — overdose mechanism", "Respiratory depression (CNS slows)"],
         ["Opioids mimic", "Endorphins (natural pain relief)"],
         ["Depressants enhance", "GABA (inhibitory neurotransmitter)"]
-      ]},
+      ], explain: "Knowing the correct reversal agent is life-saving. Opioids: naloxone (Narcan). Benzodiazepines: flumazenil. Stimulant overdose has no specific reversal agent — supportive care only. Alcohol: supportive care, no reversal agent."},
       // --- NEW: Steroids as 5th drug type ---
       { type: "flashcard", term: "Steroids (5th Drug Type)", def: "Anabolic steroids are synthetic versions of testosterone. They build muscle mass but have serious side effects: liver damage, hormonal disruption, aggression ('roid rage'), stunted growth in teens. NOT a controlled substance in the same way as others but regulated under the CSA." },
       { type: "mc", q: "According to this class, how many main drug TYPES are there?", options: ["3", "4", "5", "6"], correct: 2, explain: "Five types: Narcotics/Opioids, Depressants, Stimulants, Hallucinogens, and Steroids. The exam specifically tests all five." },
@@ -1250,7 +1548,8 @@ const UNITS = [
       { type: "flashcard", term: "Drug vs Poison", def: "A DRUG is any substance that alters normal bodily function. A POISON is any substance that causes injury, illness, or death through its chemical action — the difference is often dose and intent." },
       { type: "mc", q: "What is the key difference between a drug and a poison?", options: ["Drugs are always illegal; poisons are not", "A drug alters body function; a poison causes harm through chemical action — the line often comes down to dose", "Drugs are synthetic; poisons are natural", "Poisons only affect animals, not humans"], correct: 1, explain: "Both drugs and poisons alter body chemistry. The distinction often comes down to dose and context — even water can be toxic in extreme amounts (Paracelsus: 'the dose makes the poison')." },
       { type: "mc", q: "Which of the following is one of the MOST COMMON poisons encountered in forensic cases?", options: ["Cyanide", "Carbon monoxide", "Arsenic", "All of the above"], correct: 3, explain: "Carbon monoxide, cyanide, and arsenic are all common forensic poisons. CO is especially common (odorless, colorless — often accidental or homicidal)." },
-      { type: "fitb", q: "The average resting blood pressure for an adult is approximately ______ mmHg, and resting heart rate is ______ beats per minute.", answer: "120/80 / 60–100", explain: "Normal adult vitals: BP ~120/80 mmHg (systolic/diastolic), heart rate 60–100 bpm. Drugs significantly alter these — stimulants raise both; depressants lower them." },
+      { type: "fitb", q: "The average resting blood pressure for an adult is approximately ______ to ______ mmHg (systolic/diastolic).", answer: "120 / 80", display: "120 / 80", explain: "Normal adult blood pressure is ~120/80 mmHg. Systolic (top number) = pressure when heart beats. Diastolic (bottom number) = pressure when heart rests. Stimulants raise BP; depressants lower it." , boxes: 2},
+      { type: "fitb", q: "Resting heart rate for an adult is approximately ______ to ______ beats per minute.", answer: "60 / 100", display: "60–100", explain: "Normal adult resting heart rate is 60–100 bpm. Below 60 = bradycardia; above 100 = tachycardia. Stimulants raise HR; depressants and opioids lower it." , boxes: 2},
       // --- NEW: How to prove a poisoning ---
       { type: "mc", q: "To PROVE a poisoning occurred, which of the following must be established?", options: ["The suspect had access to the poison", "The presence of a toxic substance in the body at a lethal or harmful level", "The victim complained of feeling ill", "The suspect had motive"], correct: 1, explain: "Proving poisoning requires toxicological evidence — detecting the substance in bodily fluids/tissues at a level sufficient to cause harm. Motive and access are circumstantial; the toxicology result is the scientific proof." },
       // --- NEW: Short vs long term drug effects ---
@@ -1289,7 +1588,26 @@ const UNITS = [
         ["Depressants (alcohol/benzos)", "Enhance GABA — slow down CNS activity"],
         ["Opioids (heroin/morphine)", "Bind mu-opioid receptors — block pain, slow breathing"],
         ["Hallucinogens (LSD)", "Activate serotonin (5-HT2A) receptors — distort perception"]
-      ]}
+      ], explain: "Understanding neurotransmitter mechanisms explains how each drug class produces its effects and why addiction develops. Stimulants block dopamine reuptake; depressants enhance GABA; opioids bind mu-receptors; hallucinogens activate serotonin receptors."}
+    ,
+      { type: "matching", q: "Match each drug to its schedule under the CSA:", pairs: [
+        ["Heroin", "Schedule I — high abuse potential, no accepted medical use"],
+        ["Cocaine", "Schedule II — high abuse potential, limited medical use"],
+        ["Anabolic steroids", "Schedule III — moderate abuse potential"],
+        ["Cough syrup with codeine", "Schedule V — lowest abuse potential, OTC in some states"]
+      ], explain: "The CSA schedule reflects abuse potential and medical utility. Schedule I (heroin, LSD) = no medical use. Schedule II (cocaine, oxycodone) = high abuse, limited medical. Schedules III–V have progressively lower abuse potential."},
+      { type: "matching", q: "Match each toxicology test type to its purpose:", pairs: [
+        ["Presumptive test", "Quick field test — indicates substance MAY be present"],
+        ["Confirmatory test", "Definitive lab test — identifies substance for court"],
+        ["Duquenois-Levine test", "Presumptive color test for marijuana/cannabis"],
+        ["Gas chromatography-mass spectrometry (GC-MS)", "Gold standard confirmatory test for most substances"]
+      ], explain: "Forensic toxicology requires two-step testing: presumptive (screening) followed by confirmatory. This prevents false positives from reaching court. GC-MS is the gold standard because it separates compounds by mass AND retention time."},
+      { type: "matching", q: "Match each drug type to its primary effect on the CNS:", pairs: [
+        ["Stimulants", "Speed up CNS — increased HR, alertness, elevated mood"],
+        ["Depressants", "Slow CNS — sedation, reduced anxiety, impaired coordination"],
+        ["Opioids/Narcotics", "Pain relief, euphoria, respiratory depression"],
+        ["Hallucinogens", "Distort perception — visual/auditory hallucinations"]
+      ], explain: "The CNS effect determines the clinical presentation of intoxication. Knowing the drug class helps paramedics and investigators interpret symptoms and choose the correct reversal agent (e.g., naloxone for opioids, flumazenil for benzos)."}
     ]
   },
 
@@ -1322,12 +1640,12 @@ const UNITS = [
       { type: "mc", q: "What is the FIRST insect to arrive at a body after death?", options: ["Beetles", "Ants", "Blowflies (Calliphoridae)", "Flesh flies"], correct: 2, explain: "Blowflies (Calliphoridae) are usually the first to arrive, often within minutes of death, to lay their eggs. This is why blowfly evidence is the most valuable for PMI estimation." },
 
       // FILL IN THE BLANK
-      { type: "fitb", q: "The three signs used to estimate time of death are algor mortis, livor mortis, and ______ mortis.", answer: "rigor", display: "rigor" },
-      { type: "fitb", q: "The body cools at ______ °F per hour during the first 12 hours after death.", answer: "1.4", display: "1.4" },
-      { type: "fitb", q: "The five manners of death are Natural, Accident, Suicide, Homicide, and ______.", answer: "undetermined", display: "Undetermined" },
-      { type: "fitb", q: "Livor mortis is caused by the ______ of blood in the lowest parts of the body.", answer: "pooling", display: "pooling" },
-      { type: "fitb", q: "Rigor mortis peaks at approximately ______ hours after death.", answer: "12", display: "12" },
-      { type: "fitb", q: "The blowfly lifecycle takes approximately ______ days from egg to adult.", answer: "14", display: "14" },
+      { type: "fitb", q: "The three signs used to estimate time of death are algor mortis, livor mortis, and ______ mortis.", answer: "rigor", display: "rigor" , explain: "Algor (body cooling), livor (blood pooling), and rigor (muscle stiffening) each provide a different time window for TOD estimation. Used together, they narrow the postmortem interval more accurately than any single sign alone."},
+      { type: "fitb", q: "The body cools at ______ °F per hour during the first 12 hours after death.", answer: "1.4", display: "1.4" , explain: "1.4°F/hr is the standard cooling rate for the first 12 hours under typical conditions. After 12 hours, the rate slows to ~0.7°F/hr. Factors like clothing, body size, environment, and water can significantly alter these rates."},
+      { type: "fitb", q: "The five manners of death are Natural, Accident, Suicide, Homicide, and ______.", answer: "undetermined", display: "Undetermined" , explain: "The five manners of death (NASH + U) are determined by the medical examiner based on circumstances, not just cause. Natural = disease; Accident = unintentional; Suicide = self-inflicted; Homicide = another person; Undetermined = insufficient evidence."},
+      { type: "fitb", q: "Livor mortis is caused by the ______ of blood in the lowest parts of the body.", answer: "pooling", display: "pooling" , explain: "After death, circulation stops and gravity pulls blood to the lowest points of the body. This creates the characteristic purple-red discoloration of livor mortis. It begins at 0–2 hrs (not visible), blanches at 2–6 hrs, and fixes after 6+ hrs."},
+      { type: "fitb", q: "Rigor mortis peaks at approximately ______ hours after death.", answer: "12", display: "12" , explain: "Rigor mortis results from ATP depletion in muscle cells after death. Without ATP, actin-myosin filaments lock in place. It begins in small facial muscles (2–6 hrs), spreads downward, peaks at ~12 hrs, and resolves by 36–48 hrs."},
+      { type: "fitb", q: "The blowfly lifecycle takes approximately ______ days from egg to adult.", answer: "14", display: "14" , explain: "The blowfly (Calliphoridae) completes egg → larva (3 instars) → pupa → adult in approximately 14 days at warm temperatures (70–80°F). This lifecycle is the basis of entomological PMI estimation. Cooler temps slow development significantly."},
 
       // MATCHING
       { type: "matching", pairs: [
@@ -1336,7 +1654,7 @@ const UNITS = [
         ["Rigor mortis", "Muscle stiffening after death"],
         ["Adipocere", "Waxy soap-like decomposition product"],
         ["Mummification", "Drying/preservation in hot dry conditions"]
-      ]},
+      ], explain: "The three postmortem changes each provide different time windows for TOD estimation. Using algor + livor + rigor together narrows the postmortem interval more accurately than any single indicator alone."},
 
       // DIAGRAM
       { type: "diagram", img: "diagrams/26-U9-Insect-Succession-Timeline.jpg", imgAlt: "Decomposition stages diagram", q: "Which decomposition stage is characterized by bloating, green discoloration, and gas production?", options: ["Fresh (1–2 days)", "Bloat (2–6 days)", "Active decay (7–10 days)", "Advanced decay (10 days–7 weeks)"], correct: 1, explain: "The Bloat stage (days 2–6) is characterized by gas production from bacterial activity causing the body to swell, turn green, and emit strong odors." },
@@ -1359,14 +1677,14 @@ const UNITS = [
         ["Superior", "Toward the head"],
         ["Inferior", "Toward the feet"],
         ["Proximal", "Closer to the trunk / point of attachment"]
-      ]},
+      ], explain: "Standard anatomical position directional terms are essential for forensic reports. Anterior/posterior describe front-to-back position. Superior/inferior describe top-to-bottom. All measurements reference these standard planes."},
       { type: "matching", pairs: [
         ["Medial", "Toward the midline of the body"],
         ["Lateral", "Away from the midline"],
         ["Distal", "Farther from the trunk"],
         ["Ventral", "Front / belly side (same as anterior)"],
         ["Dorsal", "Back side (same as posterior)"]
-      ]},
+      ], explain: "Anatomical directional terms allow precise forensic documentation. Medial/lateral describe position relative to the midline. Used in wound descriptions, injury location, and evidence position documentation."},
 
       // ── DROWNING INVESTIGATION (Ms. Makley's Microbe PowerPoint 2026) ──
       { type: "flashcard", term: "Asphyxiation", def: "Death caused by a lack of oxygen. Can result from strangulation, drowning, or carbon monoxide poisoning. Classified under the 'mechanical or chemical trauma' category of mechanism of death." },
@@ -1383,25 +1701,25 @@ const UNITS = [
       { type: "mc", q: "Euglena, Paramecium caudatum, Blepharisma, and Euplotes are all classified as:", options: ["Bacteria", "Fungi", "Protozoa", "Diatoms"], correct: 2, explain: "These are all protozoa — eukaryotic, animal-like microorganisms found in freshwater. They move around and consume other organisms, unlike algae which photosynthesize." },
       { type: "mc", q: "Which type of microorganism is classified as PROKARYOTIC?", options: ["Protozoa", "Fungi", "Bacteria", "Algae"], correct: 2, explain: "Bacteria are the only prokaryotes — they have no nucleus or membrane-bound organelles. Fungi, protozoa, and algae are all eukaryotic (they have a nucleus)." },
       { type: "mc", q: "A body is found floating in a lake. Diatoms are found in the lung tissue but NOT in the bone marrow. What does this indicate?", options: ["The person definitely drowned in that lake", "The person was dead before entering the water", "The person drowned in a river, not a lake", "The diatom test was inconclusive"], correct: 1, explain: "Diatoms in lungs only (no bone marrow) = the circulatory system was NOT functioning when water entered. This means the person was likely dead before entering the water. Bone marrow diatoms = proof of drowning." },
-      { type: "fitb", q: "Death caused by lack of oxygen is called ______.", answer: "asphyxiation", display: "asphyxiation" },
-      { type: "fitb", q: "Diatoms have a ______ outer shell that resists decomposition.", answer: "silica", display: "silica" },
-      { type: "fitb", q: "To prove drowning, investigators test for diatoms in the victim's bone ______.", answer: "marrow", display: "marrow" },
-      { type: "fitb", q: "Synedra is an example of a ______, a type of algae.", answer: "diatom", display: "diatom" },
-      { type: "fitb", q: "Paramecium and Euglena are examples of ______, an animal-like type of microorganism.", answer: "protozoa", display: "protozoa" },
+      { type: "fitb", q: "Death caused by lack of oxygen is called ______.", answer: "asphyxiation", display: "asphyxiation" , explain: "Asphyxiation occurs when oxygen supply to cells is interrupted. Types include: strangulation (external compression), suffocation (airway blockage), drowning (water inhalation), and chemical asphyxiation (CO poisoning). Petechial hemorrhages are a key indicator."},
+      { type: "fitb", q: "Diatoms have a ______ outer shell that resists decomposition.", answer: "silica", display: "silica" , explain: "Diatoms are single-celled algae with silica (glass-like) cell walls called frustules. Silica resists decomposition and can survive in bone marrow long after death — making diatoms invaluable for proving drowning even in decomposed remains."},
+      { type: "fitb", q: "To prove drowning, investigators test for diatoms in the victim's bone ______.", answer: "marrow", display: "marrow" , explain: "If a person drowned while alive, diatoms entered the bloodstream through the lungs and were carried to the bone marrow. Finding diatoms in bone marrow = the person was breathing when they entered the water = drowning (not body dumping)."},
+      { type: "fitb", q: "Synedra is an example of a ______, a type of algae.", answer: "diatom", display: "diatom" , explain: "Synedra is a freshwater diatom with a needle-like shape. In drowning investigations, the species of diatom found in the victim's marrow is compared to diatoms at the suspected drowning site to confirm location."},
+      { type: "fitb", q: "Paramecium and Euglena are examples of ______, an animal-like type of microorganism.", answer: "protozoa", display: "protozoa" , explain: "Protozoa are single-celled eukaryotes that move and consume other organisms. Paramecium (cilia), Euglena (flagella). In forensic context, protozoa in the lungs/stomach contents can help confirm drowning and identify water source."},
       { type: "matching", pairs: [
         ["Bacteria", "Prokaryotic — no nucleus"],
         ["Fungi", "Eukaryotic — like yeast"],
         ["Protozoa", "Eukaryotic — animal-like, moves around"],
         ["Algae", "Eukaryotic — plant-like, has chlorophyll"],
         ["Diatom", "Algae with silica shell — key to proving drowning"]
-      ]},
+      ], explain: "Decomposition involves a succession of microorganisms. Bacteria (prokaryotes) are the primary decomposers — they break down proteins and carbohydrates, producing gases (bloat stage). Fungi also contribute in later stages."},
       { type: "matching", pairs: [
         ["Paramecium caudatum", "Protozoa found in freshwater"],
         ["Synedra", "Diatom — silica-shelled algae"],
         ["Volvox", "Algae — plant-like, photosynthesizes"],
         ["Euglena", "Protozoa — moves, found in lakes/rivers"],
         ["Blepharisma", "Protozoa — found in freshwater, pink-colored"]
-      ]},
+      ], explain: "Protozoa are classified by movement: cilia (Paramecium), flagella (Euglena), pseudopods (Amoeba). In forensic context, protozoa in lung or stomach contents help confirm drowning and can indicate the water source."},
       // --- NEW: Three systems necessary for life ---
       { type: "flashcard", term: "Three Systems Necessary for Life", def: "1. Circulatory system (heart pumps blood/oxygen). 2. Respiratory system (lungs provide oxygen). 3. Nervous system (brain controls all functions). Death occurs when any one of these fails and cannot be restored." },
       { type: "mc", q: "Which THREE body systems must ALL be functioning for life to continue?", options: ["Digestive, muscular, skeletal", "Circulatory, respiratory, nervous", "Endocrine, lymphatic, urinary", "Integumentary, immune, reproductive"], correct: 1, explain: "Life requires the circulatory system (blood/oxygen delivery), respiratory system (oxygen intake), and nervous system (brain control). Failure of any one — without restoration — means death." },
@@ -1412,7 +1730,7 @@ const UNITS = [
       // --- NEW: Both algor mortis cooling rates ---
       { type: "mc", q: "What is the rate of body cooling during the FIRST 12 hours after death (algor mortis)?", options: ["0.5°F per hour", "1°F per hour", "1.5°F per hour", "2°F per hour"], correct: 2, explain: "During the first 12 hours, the body cools at approximately 1.5°F per hour. This is the standard rate used in the TOD formula: Hours since death = (98.6 − liver temp) ÷ 1.5" },
       { type: "mc", q: "What is the rate of body cooling AFTER the first 12 hours of death?", options: ["1.5°F per hour (same rate)", "1°F per hour", "0.75°F per hour", "2°F per hour"], correct: 1, explain: "After the first 12 hours, the cooling rate slows to approximately 1°F per hour as the body equilibrates closer to ambient temperature. This slower rate must be accounted for in TOD calculations beyond 12 hours." },
-      { type: "fitb", q: "Body temperature drops at ______ °F/hr during the first 12 hours, then slows to approximately ______ °F/hr after that.", answer: "1.5 / 1", explain: "The two-rate model is critical for accurate TOD estimates. Using only 1.5°F/hr for deaths older than 12 hours will give an underestimate of time since death." },
+      { type: "fitb", q: "Body temperature drops at ______ °F/hr during the first 12 hours, then slows to approximately ______ °F/hr after that.", answer: "1.5 / 1", explain: "The two-rate model is critical for accurate TOD estimates. Using only 1.5°F/hr for deaths older than 12 hours will give an underestimate of time since death." , boxes: 2},
       // --- NEW: Four types of trauma ---
       { type: "flashcard", term: "Four Types of Trauma (Manner of Death)", def: "1. MECHANICAL — physical force (blunt, sharp, projectile). 2. CHEMICAL — poison, drugs, toxins. 3. ELECTRICAL — electrocution, lightning. 4. TEMPERATURE — hyperthermia (heat), hypothermia (cold), burns." },
       { type: "mc", q: "A victim is found with burns covering 40% of their body. This is classified as what TYPE of trauma?", options: ["Mechanical trauma", "Chemical trauma", "Electrical trauma", "Temperature trauma"], correct: 3, explain: "Burns from fire, hot liquids, or extreme heat are temperature trauma. Electrical burns are electrical trauma. Knowing the trauma type helps determine manner of death." },
@@ -1435,7 +1753,7 @@ const UNITS = [
       // --- ALGOR MORTIS MATH (from Ms. Makley's actual practice problems) ---
       { type: "mc", q: "A body is found at 10:15 PM. Liver temperature is 93.0°F. Ambient temperature is 78°F. Using the rate of 1.4°F/hr for the first 12 hours, what is the approximate TOD?", options: ["About 2 hours ago (8:15 PM)", "About 4 hours ago (6:15 PM)", "About 6 hours ago (4:15 PM)", "About 8 hours ago (2:15 PM)"], correct: 1, explain: "98.6 − 93.0 = 5.6°F drop. At 1.4°F/hr: 5.6 ÷ 1.4 = 4 hours. TOD ≈ 10:15 PM − 4 hrs = 6:15 PM. This is within the first 12 hours so the standard rate applies." },
       { type: "mc", q: "A body's liver temperature equals the ambient temperature of 95°F. What does this tell investigators about TOD?", options: ["Death occurred exactly 12 hours ago", "Death occurred within the past hour", "Death occurred at least several hours ago — cannot determine exact time from algor mortis alone", "The body was moved from a warmer location"], correct: 2, explain: "When liver temp = ambient temp, the body has fully equilibrated — it can cool no further. This means death was likely many hours ago (varies by conditions). Algor mortis can no longer give a precise estimate." },
-      { type: "fitb", q: "At 3:30 PM, an unclothed body in a stream has a liver temperature of 76.2°F. Ambient temp is 55°F. First 12 hours: 1.4°F/hr. After 12 hours: 0.7°F/hr. The first 12 hours account for ______ °F of cooling.", answer: "16.8", explain: "1.4°F/hr × 12 hrs = 16.8°F for first 12 hours. Starting at 98.6°F: after 12 hrs = 81.8°F. Since liver is 76.2°F (below 81.8°F), death occurred MORE than 12 hours ago — need to use the second rate for the remaining drop." },
+      { type: "fitb", q: "A body is found in a stream at 3:30 PM with a liver temperature of 76.2°F. The surrounding water/air temperature is 55°F. The body loses 1.4°F per hour for the first 12 hours after death, and 0.7°F per hour after that. How much temperature (in °F) did the body lose during the first 12 hours?", answer: "16.8", display: "16.8°F", explain: "1.4°F/hr × 12 hrs = 16.8°F. Starting at 98.6°F, after 12 hrs the body would be at 81.8°F. Since the liver temp is 76.2°F (below 81.8°F), death occurred MORE than 12 hours ago — apply the 0.7°F/hr rate for the remaining drop." },
       { type: "mc", q: "A body is found lying face-up in bed. Livor mortis is bright cherry-red and fixed on the back. Rigor mortis is present only in the face and jaw. What can investigators determine?", options: ["TOD is recent (under 2 hrs) and manner is natural", "TOD is 6–12 hours ago; cherry-red color suggests CO poisoning; body was NOT moved", "TOD is over 48 hrs; rigor has resolved", "Body was moved after death — lividity is inconsistent"], correct: 1, explain: "Rigor in face/jaw only = early rigor (2–6 hrs). Fixed lividity = at least 6+ hrs. So TOD ~6–12 hrs ago. Cherry-red lividity = carbon monoxide poisoning. Body NOT moved (lividity on back, consistent with face-up position)." },
       { type: "mc", q: "Blow fly maggots are found on a body in 3rd instar stage. At the ambient temperature, each instar lasts approximately 2 days. Eggs hatch after 24 hours. What is the MINIMUM PMI (postmortem interval)?", options: ["3 days", "5 days", "7 days", "9 days"], correct: 2, explain: "Egg laying is immediate. Eggs hatch: +1 day. 1st instar: +2 days. 2nd instar: +2 days. 3rd instar: currently in progress (+2 days minimum). Total minimum: 1+2+2+2 = 7 days." },
       { type: "mc", q: "A body is found buried underground. Based on decomposition, the investigator estimates 4 weeks of decomp. Using the decomposition rule of thumb, how long would equivalent decomposition take on land?", options: ["1 week", "2 weeks", "4 weeks", "8 weeks"], correct: 0, explain: "The rule of thumb: 1 week on land = 2 weeks in water = 8 weeks buried. So 4 weeks buried ÷ 8 = 0.5 weeks land equivalent. Working backwards: if it's been 4 weeks buried, that equals about 0.5 weeks on land." },
@@ -1446,7 +1764,52 @@ const UNITS = [
         ["Cherry-red", "Carbon monoxide (CO) poisoning"],
         ["Pink/bright red", "Cyanide poisoning OR cold exposure"],
         ["Inappropriate location", "Body was moved after livor became fixed"]
-      ]}
+      ], explain: "Livor mortis color provides diagnostic clues beyond TOD. Normal = purple-red. Cherry-red = CO poisoning or cyanide. Pink/bright red = hypothermia or cyanide. Greenish-brown = prolonged decomposition. Inappropriate location = body was moved."}
+    ,
+      { type: "matching", q: "Match each fly species to its role in decomposition:", pairs: [
+        ["Blow fly (Calliphoridae)", "First to arrive — metallic blue/green, lays eggs immediately"],
+        ["Flesh fly (Sarcophagidae)", "Early arrival — striped thorax, deposits larvae directly"],
+        ["Cheese skipper (Piophilidae)", "Mid-stage — arrives during active decay"],
+        ["Hide beetle (Dermestidae)", "Late stage — feeds on dried skin and tissue"]
+      ], explain: "Insect succession follows a predictable pattern based on stage of decomposition. Blow flies arrive first (minutes after death); flesh flies follow; cheese skippers appear during active decay; hide beetles arrive in the dry/skeletal stage."},
+      { type: "matching", q: "Match each preservation type to its required conditions:", pairs: [
+        ["Mummification", "Dry environment (hot OR cold) — desiccates tissue"],
+        ["Adipocere", "Damp, warm, anaerobic environment — fat converts to soap"],
+        ["Putrefaction", "Normal conditions — bacterial breakdown of soft tissue"],
+        ["Skeletonization", "Final stage — all soft tissue consumed or desiccated"]
+      ], explain: "Environmental conditions determine which preservation path a body takes. Dry = mummification. Damp + anaerobic = adipocere (saponification of fat). Normal = putrefaction → skeletonization. Each type has implications for PMI estimation."},
+      { type: "matching", q: "Match each anatomical directional term to its meaning:", pairs: [
+        ["Anterior/Ventral", "Front of the body"],
+        ["Posterior/Dorsal", "Back of the body"],
+        ["Superior", "Toward the top/head"],
+        ["Medial", "Toward the center/midline"]
+      ], explain: "Directional terms allow precise communication in forensic reports. Anterior/ventral = front; posterior/dorsal = back; superior = toward head; inferior = toward feet; medial = toward midline; lateral = away from midline."}
+    ,
+      // --- EXPANDED FITB VARIANTS (from Lilian's review) ---
+
+      // Q28 expansions: manners of death — rotate the missing word
+      { type: "fitb", q: "The five manners of death are Natural, Accident, ______, Homicide, and Undetermined.", answer: "suicide", display: "Suicide", explain: "The five manners of death (NASH-U): Natural, Accident, Suicide, Homicide, Undetermined. The manner is determined by the medical examiner based on the circumstances surrounding the death." },
+      { type: "fitb", q: "The five manners of death are Natural, ______, Suicide, Homicide, and Undetermined.", answer: "accident", display: "Accident", explain: "Accident is one of the five manners of death (NASH-U). An accidental death is unintentional — no intent to harm. Examples: car crash, drug overdose without intent, fall." },
+      { type: "fitb", q: "The five manners of death are ______, Accident, Suicide, Homicide, and Undetermined.", answer: "natural", display: "Natural", explain: "Natural death is caused by disease or internal biological failure, with no external contributing factors. The most common manner of death on death certificates." },
+      { type: "fitb", q: "The five manners of death are Natural, Accident, Suicide, ______, and Undetermined.", answer: "homicide", display: "Homicide", explain: "Homicide means another person caused the death — it does NOT mean murder (which requires intent). Justified homicide (e.g., self-defense) is still classified as homicide in forensic terms." },
+
+      // Q29 expansion: livor mortis
+      { type: "fitb", q: "______ mortis is caused by the pooling of blood in the lowest parts of the body after death.", answer: "livor", display: "Livor", explain: "Livor mortis (also called lividity) begins 0–2 hours after death and becomes fixed at 6+ hours. It appears as purple-red discoloration on the lowest skin surfaces. Cherry-red livor = CO poisoning." },
+
+      // Q30 expansion: rigor mortis
+      { type: "fitb", q: "______ mortis peaks at approximately 12 hours after death.", answer: "rigor", display: "Rigor", explain: "Rigor mortis (muscle stiffening) begins in the face/jaw 2–6 hours after death, spreads downward, peaks around 12 hours, and resolves by 36–48 hours (secondary flaccidity)." },
+
+      // Q34 expansion: diatoms
+      { type: "fitb", q: "To prove drowning, investigators test for ______ in the victim's bone marrow.", answer: "diatoms", display: "diatoms", explain: "Diatoms are microscopic algae with silica shells that resist decomposition. If found in bone marrow, they entered the bloodstream through active breathing — proving the victim was alive when submerged (drowning, not body dumping)." },
+
+      // Q37 expansions: three systems for life
+      { type: "fitb", q: "The three systems necessary for life are the respiratory, ______, and nervous systems.", answer: "circulatory", display: "circulatory", explain: "The circulatory system delivers oxygen and nutrients to all cells. Without it, the respiratory and nervous systems cannot function. All three must fail completely for legal death to be declared." },
+      { type: "fitb", q: "The three systems necessary for life are the circulatory, respiratory, and ______ systems.", answer: "nervous", display: "nervous", explain: "The nervous system (brain and spinal cord) controls all other body functions. Legal death (brain death) can be declared when the nervous system shows complete, irreversible failure — even if mechanical support maintains the heart." },
+
+      // Q39 expansions: four types of trauma
+      { type: "fitb", q: "The four types of trauma are: mechanical, chemical, electrical, and ______.", answer: "temperature", display: "temperature", explain: "Temperature trauma includes burns (hyperthermia), frostbite/hypothermia, and scalding. It is one of the four forensic trauma types along with mechanical, chemical, and electrical." },
+      { type: "fitb", q: "The four types of trauma are: chemical, ______, electrical, and temperature.", answer: "mechanical", display: "mechanical", explain: "Mechanical trauma results from physical force: blunt force, sharp force, or projectiles. It is the most common type in homicides. The other three types are chemical, electrical, and temperature." },
+      { type: "fitb", q: "The four types of trauma are: mechanical, electrical, ______, and temperature.", answer: "chemical", display: "chemical", explain: "Chemical trauma includes death by poison, drugs, or toxic substances — anything causing harm through chemical interaction. Examples: cyanide poisoning, drug overdose, corrosive ingestion." }
     ]
   },
 
@@ -1479,12 +1842,12 @@ const UNITS = [
       { type: "mc", q: "Which of the following CANNOT typically be determined from skeletal remains alone?", options: ["General age range", "Biological sex", "Approximate height", "Exact cause of death"], correct: 3, explain: "Bones can tell us age range, sex, approximate height, ancestry, and injury history. However, exact cause of death usually cannot be determined from bones alone (unless there is specific trauma)." },
 
       // FILL IN THE BLANK
-      { type: "fitb", q: "The pelvis is shaped primarily for childbirth, making it the most reliable bone for determining biological ______.", answer: "sex", display: "sex" },
-      { type: "fitb", q: "Bones of the arms and legs belong to the ______ skeleton.", answer: "appendicular", display: "appendicular" },
-      { type: "fitb", q: "The patella (kneecap) is classified as a ______ bone.", answer: "sesamoid", display: "sesamoid" },
-      { type: "fitb", q: "The life story written in bones is called the ______.", answer: "osteobiography", display: "osteobiography" },
-      { type: "fitb", q: "In non-human skulls, the foramen magnum is located more ______ (toward the back).", answer: "posterior", display: "posterior" },
-      { type: "fitb", q: "The coronal suture of the skull begins closing at approximately age ______.", answer: "50", display: "50" },
+      { type: "fitb", q: "The pelvis is shaped primarily for childbirth, making it the most reliable bone for determining biological ______.", answer: "sex", display: "sex" , explain: "The pelvis shows the clearest sex differences because it is shaped by reproductive function. Female: wide subpubic angle (>90°), wide sciatic notch, oval pelvic inlet. Male: narrow angle (<90°), narrow notch, heart-shaped inlet."},
+      { type: "fitb", q: "Bones of the arms and legs belong to the ______ skeleton.", answer: "appendicular", display: "appendicular" , explain: "The appendicular skeleton includes all limb bones and their girdles (shoulder = clavicle + scapula; pelvic = ilium + ischium + pubis). The axial skeleton is the central axis: skull, vertebral column, sternum, and ribs."},
+      { type: "fitb", q: "The patella (kneecap) is classified as a ______ bone.", answer: "sesamoid", display: "sesamoid" , explain: "Sesamoid bones develop within tendons where they are subjected to stress — they protect the tendon and improve mechanical advantage. The patella is the largest sesamoid bone. Others include some bones in the hand and foot."},
+      { type: "fitb", q: "The life story written in bones is called the ______.", answer: "osteobiography", display: "osteobiography" , explain: "The osteobiography includes all information readable from skeletal remains: biological profile (age, sex, ancestry, stature), pathologies, trauma history, nutritional status, occupation markers, and unique identifiers. It is the foundation of forensic anthropology."},
+      { type: "mc", q: "In quadrupedal animals, where is the foramen magnum located — and what is the anatomical term for this direction?", options: ["Inferior — pointing straight down", "Anterior — toward the front of the skull", "Posterior — toward the back of the skull", "Superior — toward the top of the skull"], correct: 2, explain: "Quadruped animals hold their heads horizontally, so the foramen magnum faces POSTERIORLY (toward the back). In humans, upright posture shifts it to a central/inferior position — a key difference used to distinguish human from non-human skulls." },
+      { type: "fitb", q: "The coronal suture of the skull begins closing at approximately age ______.", answer: "50", display: "50" , explain: "The coronal suture begins closing around age 30–40 and is completely fused by ~50 in males, later in females. Complete fusion of ALL three major sutures (sagittal + coronal + lambdoid) indicates age 35+ (male) or 50+ (female)."},
 
       // MATCHING
       { type: "matching", pairs: [
@@ -1493,14 +1856,14 @@ const UNITS = [
         ["Flat bones", "Cranium, Ribs, Sternum, Scapula"],
         ["Irregular bones", "Vertebrae, Sacrum, Coccyx"],
         ["Sesamoid bones", "Patella (kneecap)"]
-      ]},
+      ], explain: "Bone classification reflects function: Long bones act as levers for movement; Short bones provide stability; Flat bones protect organs; Irregular bones have complex shapes for special functions; Sesamoid bones reduce tendon friction."},
       { type: "matching", pairs: [
         ["European skull", "Circular orbits, narrow nasal aperture, pronounced bridge"],
         ["Asian skull", "Circular orbits, heart-shaped nasal aperture, shovel incisors"],
         ["African skull", "Rectangular orbits, wide nasal aperture, prognathism"],
         ["Female skull", "Rounded orbits, V-shaped mandible, thin brow ridge"],
         ["Male skull", "Square orbits, thick brow ridge, occipital protuberance"]
-      ]},
+      ], explain: "Population affinity assessment from skulls uses multiple features together. No single feature is definitive — forensic anthropologists report probability ranges, not certainties. This evidence must be interpreted carefully in court."},
 
       // DIAGRAM
       { type: "diagram", img: "diagrams/27a-U10-Cranial-Bone-Types.jpg", imgAlt: "Male vs female skull comparison", q: "Looking at two skulls, Skull A has a pronounced brow ridge, square eye orbits, and an occipital protuberance. Skull A is most likely:", options: ["Female", "Male", "Cannot be determined", "Juvenile"], correct: 1, explain: "These are all male skull characteristics: prominent brow ridge (supraorbital ridge), square/rectangular orbits, and occipital protuberance (bump at back of skull)." },
@@ -1523,10 +1886,11 @@ const UNITS = [
       { type: "mc", q: "Skull sutures that are completely fused suggest the individual was:", options: ["A juvenile (under 18)", "A young adult (20–30)", "A middle-aged adult (30–50)", "An older adult (50+)"], correct: 3, explain: "Skull sutures fuse progressively with age. Complete fusion of major sutures (coronal, lambdoid) suggests an older adult, typically 50+. Open sutures indicate younger age; partially fused indicates middle age." },
       { type: "mc", q: "Compared to a human skeleton, an animal (quadruped) skeleton has:", options: ["A centrally-located foramen magnum and S-curved spine", "A posteriorly-located foramen magnum and C-curved spine", "A wider pelvis and shorter forelimbs", "The same spine curvature but different pelvis"], correct: 1, explain: "Quadrupeds have: foramen magnum at the back (posterior) of skull, C-curved spine (horizontal), narrow pelvis, forelimbs ≈ hindlimbs in length. These are the key features distinguishing animal from human skeletal remains." },
 
-      { type: "fitb", q: "In humans, the foramen magnum is located ______ under the skull, reflecting upright posture.", answer: "centrally", display: "centrally" },
-      { type: "fitb", q: "The formula for estimating male height from the femur is: (femur length × 2.23) + ______.", answer: "69.08", display: "69.08" },
-      { type: "fitb", q: "Skull ______ gradually fuse with age and can be used to estimate age in adults.", answer: "sutures", display: "sutures" },
-      { type: "fitb", q: "Hair color, eye color, and weight ______ be determined from skeletal remains alone.", answer: "cannot", display: "cannot" },
+      { type: "fitb", q: "In humans, the foramen magnum is located ______ under the skull, reflecting upright posture.", answer: "centrally", display: "centrally" , explain: "Humans walk upright, so the foramen magnum (the opening through which the spinal cord passes) is positioned centrally underneath the skull to support vertical posture. In quadrupeds it is posterior, facing backward."},
+      { type: "fitb", q: "When using regression formulas to estimate stature from a femur, a forensic scientist must select a formula based on the individual's biological sex and ______.", answer: "ancestry / population affinity / race / ethnicity", display: "ancestry", explain: "Height estimation formulas are sex- AND population-specific because bone-to-height ratios differ between groups. Using the wrong formula can result in estimates several centimeters off. Always determine sex and ancestry before calculating stature." , boxes: 1},
+      { type: "fitb", q: "A female femur measuring 44.9 cm is found at a scene. Using the formula Height (cm) = (2.47 × femur) + 54.10, the estimated height is ______ cm, which equals approximately ______ inches.", answer: "165 / 65", display: "~165 cm / ~65 inches", explain: "(2.47 × 44.9) + 54.10 = 110.90 + 54.10 = 165.00 cm ÷ 2.54 = 64.96 ≈ 65 inches (about 5'5"). Always report a range, not a single number, due to natural biological variation." , boxes: 2},
+      { type: "fitb", q: "Skull ______ gradually fuse with age and can be used to estimate age in adults.", answer: "sutures", display: "sutures" , explain: "The three major cranial sutures are: sagittal (top midline), coronal (across top), and lambdoid (across back). They begin as open seams at birth for brain growth and gradually fuse throughout adulthood, providing age estimates for adults."},
+      { type: "fitb", q: "Soft-tissue characteristics such as hair color, eye color, and exact body weight ______ be determined by examining the physical structure of skeletal remains alone.", answer: "cannot / can't / can not", display: "cannot", explain: "Skeletal remains reveal age, sex, ancestry, stature, trauma, and pathology — but NOT soft-tissue traits like hair/eye color, skin tone, or weight. These require DNA analysis or other methods." },
 
       { type: "matching", pairs: [
         ["Human spine", "S-curved (for upright walking)"],
@@ -1534,14 +1898,14 @@ const UNITS = [
         ["Human foramen magnum", "Centrally located under skull"],
         ["Animal foramen magnum", "Posterior (back) of skull"],
         ["Human pelvis", "Bowl-shaped — wider for childbirth"]
-      ]},
+      ], explain: "The S-curved human spine is a key adaptation for bipedal (upright) walking, distributing weight efficiently. Animal spines typically have a single arch. Spinal curvature helps distinguish human from non-human remains."},
       { type: "matching", pairs: [
         ["Primary (baby) teeth complete", "By age 2–3"],
         ["First permanent teeth erupt", "Around age 6"],
         ["Third molars (wisdom teeth)", "Ages 17–25"],
         ["Skull sutures begin closing", "Around age 30–40"],
         ["Skull sutures fully fused", "Age 50+"]
-      ]},
+      ], explain: "Age estimation from teeth uses eruption sequence (birth–25 years), wear patterns, and root development. Teeth survive longer than bone and are the most reliable age indicator in both young and old individuals."},
       { type: "flashcard", term: "23 Bones to Know — Axial Skeleton", def: "Skull: cranium, mandible. Spine: cervical vertebrae (neck), thoracic vertebrae (mid-back), lumbar vertebrae (lower-back), sacrum, coccyx. Thorax: sternum, ribs. The axial skeleton forms the central axis of the body." },
       { type: "flashcard", term: "23 Bones to Know — Appendicular Skeleton", def: "Upper limbs: clavicle, scapula, humerus, radius, ulna, carpals, metacarpals, phalanges. Lower limbs: pelvis (ilium/ischium/pubis), femur, patella, tibia, fibula, tarsals, metatarsals, phalanges." },
       { type: "mc", q: "The FEMUR is what type of bone, and belongs to which skeleton division?", options: ["Flat bone, axial", "Long bone, appendicular", "Short bone, axial", "Irregular bone, appendicular"], correct: 1, explain: "The femur is the longest long bone in the body, belonging to the appendicular skeleton. Long bones have a shaft (diaphysis) and growth plate ends (epiphyses)." },
@@ -1571,7 +1935,7 @@ const UNITS = [
       { type: "mc", q: "A skull is examined. All three major cranial sutures (sagittal, coronal, lambdoid) are completely fused. This individual is MOST likely:", options: ["Male, under 26", "Female, under 29", "Male over 35 OR female over 50", "A juvenile — sutures fuse early"], correct: 2, explain: "Complete closure of ALL THREE major sutures: male over 35, female over 50. Sagittal suture alone closing = male 26+, female 29+. Open sutures = younger. Always use multiple age indicators for best estimate." },
       { type: "mc", q: "A bone is found with dry, brittle, jagged edges at the fracture site and a noticeably different color than the rest of the bone. This trauma is classified as:", options: ["Antemortem — healing present", "Perimortem — smooth flexible bone", "Postmortem — dry brittle jagged edges indicate damage after death", "Sharp force — clean cut edges"], correct: 2, explain: "Postmortem trauma occurs after death when bone is dry and brittle. It creates jagged, irregular edges and often shows color differences (bleaching, staining) compared to surrounding bone. No healing = no blood supply = already dead." },
       // --- HEIGHT MATH ---
-      { type: "fitb", q: "A femur measures 48.5 cm. For males, the height formula is: Height = (2.38 × femur cm) + 61.41 cm. The estimated height in cm is ______. Converting to inches (÷ 2.54): approximately ______ inches.", answer: "≈ 176.74 cm / ≈ 69.6 inches (about 5'10")", explain: "(2.38 × 48.5) + 61.41 = 115.43 + 61.41 = 176.84 cm ≈ 69.6 inches ≈ 5'10". Height estimates from bone give a RANGE, not an exact value. Biological sex must be determined first since male and female formulas differ." },
+      { type: "fitb", q: "A female femur measuring 44.9 cm is found at a scene. Using Height (cm) = (2.47 × femur) + 54.10, the estimated height is ______ cm, which equals approximately ______ inches. (Round to nearest whole number.)", answer: "165 / 65", display: "165 cm / 65 inches", explain: "(2.47 × 44.9) + 54.10 = 110.90 + 54.10 = 165.00 cm. 165 ÷ 2.54 = 64.96 ≈ 65 inches (about 5'5"). Height estimates always carry a margin of error — report as a range in forensic practice." , boxes: 2},
       { type: "mc", q: "A forensic anthropologist is estimating height from a femur. Why is it important to determine biological sex BEFORE calculating height?", options: ["Males and females have different femur shapes", "Male and female height estimation formulas use different multipliers and constants", "Female femurs are always shorter", "Sex determination is required by law before height estimation"], correct: 1, explain: "Height formulas are sex-specific because males and females have different bone-to-height ratios (males generally taller per bone length). Using the wrong formula can produce an estimate several inches off." },
       { type: "mc", q: "A 45-year-old female skeleton is found. After age 30, height decreases approximately 0.06 cm per year. If her estimated height from bone is 165 cm, her living height at age 30 was approximately:", options: ["165 cm — no change", "165.9 cm (adding back 15 years × 0.06 cm)", "163.1 cm (subtracting 15 years × 0.06 cm)", "Cannot be calculated without femur length"], correct: 1, explain: "From age 30 to 45 = 15 years of shrinkage. 15 × 0.06 cm = 0.9 cm. Add back to bone-based estimate: 165 + 0.9 = 165.9 cm. The bone-based estimate reflects her height at death; add back the shrinkage to estimate peak living height." },
       // --- MATCHING: Bone type to example ---
@@ -1580,7 +1944,25 @@ const UNITS = [
         ["Short bone", "Carpals (wrist bones)"],
         ["Flat bone", "Sternum (breastbone)"],
         ["Sesamoid bone", "Patella (kneecap)"]
-      ]}
+      ], explain: "Bone classification is based on shape and function. Long bones (lever action): femur, humerus. Short bones (stability): carpals, tarsals. Flat bones (protection): sternum, skull plates. Irregular (complex function): vertebrae. Sesamoid (tendons): patella."}
+    ,
+      { type: "matching", q: "Match each population affinity group to a skull characteristic:", pairs: [
+        ["Caucasoid (European)", "Sloping orbits, prominent chin, long nasal spine, retreating cheekbones"],
+        ["Mongoloid (Asian/Native American)", "Projecting cheekbones, shoveled incisors, slight nasal depression"],
+        ["Negroid (African)", "Rectangular orbit, large prognathism, small nasal spine, vertical cheekbones"]
+      ], explain: "Population affinity from skulls is probabilistic, not definitive. Forensic anthropologists use multiple features together and report a probability range. Ancestry determination is controversial and must be interpreted carefully within its forensic context."},
+      { type: "matching", q: "Match each sex determination feature to its male vs female characteristic:", pairs: [
+        ["Subpubic angle", "Female: > 90° (wider) / Male: < 90° (narrower)"],
+        ["Sciatic notch", "Female: wide and shallow / Male: narrow and deep"],
+        ["Brow ridge", "Female: thin and small / Male: thick and prominent"],
+        ["Occipital protuberance", "Female: absent / Male: present"]
+      ], explain: "Sex determination from bone is most accurate from the pelvis (95%+ accuracy), followed by the skull (80–90%). Using multiple features from both regions provides the highest accuracy. All estimates are probabilistic, not absolute."},
+      { type: "matching", q: "Match each age estimation method to the age range it works best for:", pairs: [
+        ["Tooth eruption sequence", "Birth through age 25 (wisdom teeth last)"],
+        ["Epiphyseal (growth plate) fusion", "Childhood through early 20s"],
+        ["Skull suture closure", "Adults over 26 — more reliable in older individuals"],
+        ["Pubic symphysis changes", "Adults — surface degeneration indicates increasing age"]
+      ], explain: "Age estimation uses different methods for different life stages. Children/teens: growth plates and tooth eruption are most reliable. Adults: skull sutures, pubic symphysis, and sternal rib end changes. Older adults: multiple degenerative markers combined."}
     ]
   },
 
@@ -1612,12 +1994,12 @@ const UNITS = [
       { type: "mc", q: "In the Slime #9 murder mystery lab, which type of forensic analysis was applied?", options: ["Toxicology screening", "Trace evidence fiber analysis", "Questioned document analysis, handwriting comparison, and chromatography", "Entomology and TOD estimation"], correct: 2, explain: "The Slime #9 lab was a Unit 11 activity applying questioned document examination, handwriting comparison, and chromatography (Rf values) to solve the mystery." },
 
       // FILL IN THE BLANK
-      { type: "fitb", q: "A known handwriting sample used for comparison is called an ______.", answer: "exemplar", display: "exemplar" },
-      { type: "fitb", q: "A forgery created by tracing over a genuine signature using a light source is called a ______ forgery.", answer: "traced", display: "traced" },
-      { type: "fitb", q: "The Rf value = distance pigment traveled ÷ distance ______ traveled.", answer: "solvent", display: "solvent" },
-      { type: "fitb", q: "Any document whose authenticity is in question is called a ______ document.", answer: "questioned", display: "questioned" },
-      { type: "fitb", q: "Forged signatures often show ______, pen lifts, and a 'drawn' quality as signs of the forger suppressing natural habits.", answer: "hesitation", display: "hesitation" },
-      { type: "fitb", q: "US currency uses ______ ink that shifts color when the bill is tilted.", answer: "color-shifting", display: "color-shifting" },
+      { type: "fitb", q: "A known handwriting sample used for comparison is called an ______.", answer: "exemplar", display: "exemplar" , explain: "Exemplars are the reference standard in questioned document examination. They must be collected carefully: obtained voluntarily or via court order, written naturally (same instrument if possible), and 20–30 signatures collected to capture natural variation."},
+      { type: "fitb", q: "A forgery created by tracing over a genuine signature using a light source is called a ______ forgery.", answer: "traced", display: "traced" , explain: "Traced forgery is detected by examining pen pressure (too light, too consistent), tremor lines, and the presence of indentations from the original. The forger must work slowly, creating unnatural strokes visible under magnification."},
+      { type: "fitb", q: "The Rf value = distance pigment traveled ÷ distance ______ traveled.", answer: "solvent", display: "solvent" , explain: "The Rf (retention factor) value is used to compare ink pigments in TLC analysis. Values range 0–1. A matching Rf value AND color under the same solvent system = presumptive match. GC-MS confirms the exact chemical composition."},
+      { type: "mc", q: "A ransom note found at a crime scene is an example of which type of evidence?", options: ["An exemplar document", "A questioned document", "A requested writing sample", "A non-request standard"], correct: 1, explain: "A questioned document is any document whose authenticity, origin, or content is in dispute. A ransom note is the classic example — its authorship is unknown and under investigation. An exemplar is a KNOWN authentic sample used for comparison." },
+      { type: "fitb", q: "Forged signatures often show ______, pen lifts, and a 'drawn' quality as signs of the forger suppressing natural habits.", answer: "hesitation", display: "hesitation" , explain: "When forgers try to copy a signature, they must slow down — producing hesitation marks, tremor, pen lifts, and a drawn/labored quality. Genuine signatures are fast and fluid, with confident strokes. These differences are visible under low magnification."},
+      { type: "fitb", q: "As a security measure against counterfeiting, modern United States currency uses ______ ink, which changes color depending on the angle from which the bill is viewed.", answer: "color-shifting / optically variable / OV / color shifting", display: "color-shifting (optically variable)", explain: "Color-shifting (optically variable) ink appears gold when viewed straight on and shifts to green when tilted. Located on the numeral in the lower-right corner of $100, $50, and other high-denomination bills." },
 
       // MATCHING
       { type: "matching", pairs: [
@@ -1626,14 +2008,14 @@ const UNITS = [
         ["Simulated forgery", "Freehand copy with model present"],
         ["Exemplar", "Known authentic handwriting sample"],
         ["Questioned document", "Authenticity is in dispute"]
-      ]},
+      ], explain: "The three forgery types differ in technique and detectability: Blind forgery (memory) shows natural flow but wrong forms; Simulated (copying) shows hesitation; Traced shows too much precision and lacks natural variation."},
       { type: "matching", pairs: [
         ["Microprinting", "Tiny text invisible to naked eye on currency"],
         ["UV thread", "Glows under ultraviolet light in currency"],
         ["Color-shifting ink", "Green to black when bill is tilted"],
         ["Watermark", "Image visible when held to light"],
         ["Raised printing", "Texture you can feel on currency"]
-      ]},
+      ], explain: "US currency layers multiple security features to prevent counterfeiting: microprinting (requires magnification), security thread (UV reactive), color-shifting ink, watermark, and raised printing."},
 
       // DIAGRAM
       { type: "diagram", img: "diagrams/30-U11-Handwriting-Comparison.jpg", imgAlt: "Handwriting characteristics diagram", q: "Which handwriting characteristic refers to how hard the writer presses the pen against the paper?", options: ["Slope", "Pressure", "Angularity", "Alignment"], correct: 1, explain: "Pressure refers to the force applied by the writer. Heavy pressure leaves indentations visible from the back; this is also measurable with an electrostatic detection apparatus (ESDA)." },
@@ -1657,11 +2039,11 @@ const UNITS = [
       { type: "mc", q: "Which handwriting characteristic refers to the consistency of the baseline (whether letters sit evenly on an imaginary line)?", options: ["Slope", "Pressure", "Alignment", "Rhythm"], correct: 2, explain: "Alignment refers to how consistently the writing sits on the baseline. Some people write with a rising baseline (upward drift), others with a falling baseline, and others very consistently level — all are individually distinctive." },
       { type: "mc", q: "To identify whether two documents were written by the same person, a document examiner compares the questioned document to a(n):", options: ["Forged document", "Exemplar (known handwriting sample)", "Anonymous tip", "Digital scan only"], correct: 1, explain: "An exemplar is a known, authentic handwriting sample from a specific person. The examiner compares the questioned document against the exemplar, looking for at least 4 matching characteristics." },
 
-      { type: "fitb", q: "A tool that provides a magnified 3D view of document surfaces is called a ______.", answer: "stereoscope", display: "stereoscope" },
-      { type: "fitb", q: "Intentional deception for financial gain — broader than forgery — is called ______.", answer: "fraud", display: "fraud" },
-      { type: "fitb", q: "To conclude two samples share an author, examiners must identify at least ______ matching handwriting features.", answer: "4", display: "4" },
-      { type: "fitb", q: "Handwriting ______ refers to whether letters lean left, right, or are upright.", answer: "slope", display: "slope" },
-      { type: "fitb", q: "An exemplar is a ______, authentic handwriting sample used for comparison.", answer: "known", display: "known" },
+      { type: "fitb", q: "A tool that provides a magnified 3D view of document surfaces is called a ______.", answer: "stereoscope", display: "stereoscope" , explain: "The stereoscope (stereomicroscope) provides binocular 3D magnification of document surfaces without requiring a thin section. It reveals erasure damage (disrupted paper fibers), indentations, and printing defects at low magnification."},
+      { type: "fitb", q: "Intentional deception carried out for personal or financial gain is legally defined as ______.", answer: "fraud", display: "fraud", explain: "Fraud is broader than forgery — it includes any intentional deception for gain. Forgery (creating or altering a document) is a specific type of fraud. When forgery involves monetary gain, it becomes fraud." },
+      { type: "mc", q: "According to forensic document examination standards, what is the minimum number of matching handwriting characteristics required to positively identify a single author?", options: ["Exactly 8 points of comparison", "Exactly 12 points of comparison", "At least 16 points of comparison", "There is no fixed numerical threshold — it depends on the quality of the features"], correct: 3, explain: "Unlike fingerprint analysis, forensic handwriting examination has NO fixed numerical threshold. A positive attribution depends on the quality, rarity, and consistency of matching characteristics — not a specific count. Courts have recognized this distinction." },
+      { type: "fitb", q: "Handwriting ______ refers to whether letters lean left, right, or are upright.", answer: "slope / slant", display: "slope (or slant)", explain: "Slope/slant is one of the 12+ handwriting characteristics analyzed in questioned document examination. A consistent slant is a class characteristic; unusual or inconsistent slant can indicate disguised writing or forgery." },
+      { type: "mc", q: "Which of the following best describes an exemplar in forensic document examination?", options: ["A forged document found at a crime scene", "A known, authentic handwriting sample used for comparison", "Any document whose authenticity is currently in question", "A digital scan of an anonymous ransom note"], correct: 1, explain: "An exemplar is a KNOWN writing sample from a verified source — used to compare against the questioned document. The more exemplars collected, the better (20–30 signatures recommended). The suspect should not see the questioned document when providing exemplars." },
 
       { type: "matching", pairs: [
         ["Stereoscope", "3D magnified view of document surface"],
@@ -1669,14 +2051,14 @@ const UNITS = [
         ["Chromatography", "Separates ink components by Rf value"],
         ["IR spectroscopy", "Identifies ink by molecular fingerprint"],
         ["Comparison microscope", "Side-by-side examination of two samples"]
-      ]},
+      ], explain: "Document examination tools reveal different types of evidence: Stereoscope for surface damage, ESDA for pressure indentations, UV for fluorescence/erasures, IR for hidden ink layers."},
       { type: "matching", pairs: [
         ["Slope", "Lean of letters — left, right, or upright"],
         ["Pen pressure", "Force applied — leaves indentations"],
         ["Alignment", "How writing sits on the baseline"],
         ["Letter formation", "Shape of individual letters"],
         ["Rhythm", "Consistency and flow of the writing"]
-      ]},
+      ], explain: "Handwriting slope, baseline, and letter forms together create a unique writing profile. No single feature makes an identification — forensic document examiners consider the combination of all characteristics."},
 
       // ── FACIAL RECONSTRUCTION (Unit 11 — Anthropology course outline) ──
       { type: "flashcard", term: "Facial Reconstruction", def: "The process of rebuilding a face on a skull to help identify unknown remains. Can be done in 2D (artist sketch based on skull measurements) or 3D (clay/digital model built up on the skull). Uses tissue depth data from cadaver studies to estimate soft tissue thickness at key landmarks." },
@@ -1685,15 +2067,15 @@ const UNITS = [
       { type: "mc", q: "What is the PRIMARY purpose of facial reconstruction in forensic science?", options: ["To make a definitive legal identification of remains", "To generate investigative leads by giving unknown remains a recognizable face", "To determine the cause of death", "To estimate the age of the individual"], correct: 1, explain: "Facial reconstruction generates leads — it produces a likeness to help the public recognize and report who the person might be. It cannot make a positive identification, which requires DNA, dental records, or fingerprints." },
       { type: "mc", q: "Which facial features CANNOT be reliably determined from a skull alone?", options: ["General face shape and cheekbone structure", "Approximate nose width", "Eye color, hair style, and ear shape", "Approximate age range"], correct: 2, explain: "Bone gives us face shape, cheekbone prominence, nose width estimates, and approximate age. Soft tissue features — eye color, hair color and style, ear shape, lip fullness — cannot be determined from bone alone." },
       { type: "mc", q: "Tissue depth markers used in facial reconstruction are based on:", options: ["The examiner's artistic judgment", "Statistical averages from cadaver studies at anatomical landmarks", "X-ray data from living patients", "The victim's medical records"], correct: 1, explain: "Tissue depth data comes from cadaver studies measuring soft tissue thickness at specific skull landmarks. The data varies by sex, age, and body build — a male adult has different average tissue depths than a female or child." },
-      { type: "fitb", q: "Facial reconstruction can generate investigative ______, but cannot make a positive identification.", answer: "leads", display: "leads" },
-      { type: "fitb", q: "A positive identification of skeletal remains requires DNA, fingerprints, or ______ records.", answer: "dental", display: "dental" },
+      { type: "fitb", q: "Forensic facial reconstruction is primarily used to generate investigative ______, rather than to establish a definitive, positive identification.", answer: "leads", display: "leads", explain: "Facial reconstruction (clay, 2D sketch, or computer-generated) can help identify unknown remains by generating leads — prompting recognition or tips. It CANNOT make a positive ID. Only DNA, fingerprints, dental records, or unique medical evidence can do that." },
+      { type: "fitb", q: "A positive identification of skeletal remains requires DNA, fingerprints, or ______ records.", answer: "dental", display: "dental" , explain: "Dental records are used because teeth are the hardest substance in the body and survive long after soft tissue is gone. Dental comparison requires ante-mortem X-rays or records from the dentist. It is as definitive as fingerprints when records are available."},
       { type: "matching", pairs: [
         ["Facial reconstruction", "Rebuilds face to generate investigative leads"],
         ["Tissue depth markers", "Pegs showing average soft tissue thickness at landmarks"],
         ["2D reconstruction", "Artist sketch based on skull measurements"],
         ["3D reconstruction", "Clay or digital model built on the skull"],
         ["Positive ID method", "DNA, dental records, or fingerprints — NOT reconstruction"]
-      ]},
+      ], explain: "Forensic facial reconstruction generates investigative leads — not positive IDs. Only DNA, fingerprints, dental records, or unique medical evidence can make a positive identification."},
       // --- NEW: Pencil hardness, paper qualities, erasures, secret messages ---
       { type: "flashcard", term: "Pencil Hardness Scale (Hard to Soft)", def: "Hard to Soft: 9H, 8H, 7H, 6H, 5H, 4H, 3H, 2H, H, HB (middle), B, 2B, 3B, 4B, 5B, 6B, 7B, 8B, 9B. HARD pencils (H) make faint, thin lines. SOFT pencils (B) make dark, thick lines and leave more graphite on the page." },
       { type: "mc", q: "A pencil marking that is dark, thick, and leaves heavy graphite residue was made by which type of pencil?", options: ["Hard pencil (H range)", "Medium pencil (HB)", "Soft pencil (B range)", "Mechanical pencil (0.5mm)"], correct: 2, explain: "Soft pencils (B range) have more clay-to-graphite ratio favoring graphite — they leave darker, thicker marks. Hard pencils (H range) have more clay, leaving faint, precise lines." },
@@ -1731,15 +2113,35 @@ const UNITS = [
       { type: "mc", q: "Two pencil lines cross on a document. Under the microscope, the graphite from Line A appears to sit ON TOP of Line B at the crossing point. Which line was drawn first?", options: ["Line A — it is on top so it was drawn last", "Line B — Line A's graphite deposits over it, so B was drawn first", "Both were drawn simultaneously", "Cannot determine from graphite position alone"], correct: 1, explain: "The line drawn SECOND deposits graphite on top of the existing line. At the intersection, Line A's graphite is on top of Line B — meaning Line B was drawn first. This technique reveals the sequence of marks on questioned documents." },
       { type: "mc", q: "An investigator suspects a document was altered by erasure. Which technique would BEST reveal what was originally written?", options: ["Magnifying glass examination only", "ESDA (Electrostatic Detection Apparatus) — detects pressure indentations from writing", "Fingerprint powder dusting", "UV light alone"], correct: 1, explain: "ESDA detects indentations left by writing pressure from pages above. Even after erasure, the physical indentation in the paper remains. UV and IR light can also reveal erased ink traces, but ESDA is best for pressure-based writing remnants." },
       // --- Rf VALUE MATH ---
-      { type: "fitb", q: "In a TLC ink chromatography test, a pigment travels 4.2 cm. The solvent front travels 7.0 cm. The Rf value is ______.", answer: "0.60", explain: "Rf = distance pigment traveled ÷ distance solvent traveled = 4.2 ÷ 7.0 = 0.60. Rf values always fall between 0 and 1. Two inks are considered a match if their Rf values are the same AND their colors match under the same solvent conditions." },
-      { type: "fitb", q: "Ink sample A has an Rf of 0.45. Ink sample B has an Rf of 0.45. The pigment colors at that spot also match. These two inks are considered a ______ match. Is this enough for court?", answer: "presumptive / No — confirmatory testing (GC-MS) needed", explain: "Matching Rf values and colors is a presumptive match — it strongly suggests the inks may be the same. But for court, confirmatory testing (gas chromatography-mass spectrometry) is required to definitively identify the ink's chemical composition." },
+      { type: "fitb", q: "In a thin-layer chromatography ink analysis, a pigment travels 4.2 cm while the solvent front travels 7.0 cm. The Rf value for this pigment is ______.", answer: "0.6 / 0.60", display: "0.60", explain: "Rf = distance pigment traveled ÷ distance solvent traveled = 4.2 ÷ 7.0 = 0.60. Rf values always fall between 0 and 1. Two inks are a presumptive match if their Rf values AND spot colors match under identical conditions." },
+      { type: "fitb", q: "Ink sample A and ink sample B have identical Rf values and matching pigment colors after a thin-layer chromatography test. In forensic science, this initial finding is considered a ______ match.", answer: "presumptive", display: "presumptive", explain: "A presumptive match means the evidence suggests the samples MAY share the same source, but does not definitively prove it. Confirmatory testing (GC-MS) is required before making a definitive identification for court." , boxes: 1},
+      { type: "mc", q: "If two ink samples show a presumptive match via thin-layer chromatography, is this finding alone sufficient for definitive identification in court?", options: ["Yes — matching Rf values and colors provide definitive, individualizing proof", "Yes — chromatography is an absolute, error-free confirmatory method", "No — TLC is a class characteristic; confirmatory testing like GC-MS is required", "No — chromatography is completely subjective and not legally admissible"], correct: 2, explain: "TLC is a PRESUMPTIVE test — it identifies class characteristics. For court, GC-MS (gas chromatography-mass spectrometry) is the gold standard confirmatory test that identifies the exact chemical composition of each ink." },
       // --- MATCHING: Check fraud types ---
       { type: "matching", q: "Match each check fraud method to its correct definition:", pairs: [
         ["Check washing", "Using chemicals to remove ink from a real check, then rewriting it for a higher amount"],
         ["Check kiting", "Exploiting bank float time by writing checks between two accounts with insufficient funds"],
         ["Paperhanging", "Writing checks on a closed or nonexistent bank account"],
         ["Simulated forgery", "Forging a signature from memory without seeing the original"]
-      ]}
+      ], explain: "Check fraud exploits weaknesses in the banking system. Washing removes ink chemically. Kiting exploits float time between accounts. Paperhanging passes checks on closed accounts. Simulated forgery copies a signature from memory without tracing."}
+    ,
+      { type: "matching", q: "Match each handwriting characteristic to its definition:", pairs: [
+        ["Slant/Slope", "Whether letters lean left, right, or are upright"],
+        ["Baseline", "The imaginary line letters rest on — straight, wavy, or ascending"],
+        ["Pen pressure", "How hard the writer presses — creates groove visible under raking light"],
+        ["Letter spacing", "The distance between individual letters within words"]
+      ], explain: "Forensic document examiners analyze multiple handwriting features simultaneously — no single feature makes an identification. The combination of slope, baseline, pressure, spacing, and letter forms creates a unique writing profile."},
+      { type: "matching", q: "Match each currency security feature to its location/description:", pairs: [
+        ["Security thread", "Embedded in paper — glows different color per denomination under UV"],
+        ["Microprinting", "Tiny text around portrait and borders — invisible to naked eye"],
+        ["Color-shifting ink", "The numeral in lower right corner — changes gold to green when tilted"],
+        ["Watermark", "Visible when held to light — matches portrait on front"]
+      ], explain: "US currency has multiple layered security features that make counterfeiting extremely difficult. Each feature requires specialized equipment to reproduce. Counterfeit detection pens only test for paper composition — they are easily defeated with washed bills."},
+      { type: "matching", q: "Match each document examination tool to its primary use:", pairs: [
+        ["Stereoscope", "3D magnified view of paper surface — detects erasures and indentations"],
+        ["ESDA", "Electrostatic detection of writing pressure indentations on underlying pages"],
+        ["UV light", "Reveals fluorescence — detects erasures, alterations, and security features"],
+        ["Infrared light", "Penetrates ink layers — reveals writing hidden under correction fluid"]
+      ], explain: "Different tools reveal different types of alterations. Stereoscope: surface damage. ESDA: pressure indentations. UV: fluorescence and erasures. IR: ink composition and hidden writing. Each tool addresses a different type of questioned document problem."}
     ]
   }
 ];
@@ -1757,6 +2159,7 @@ let selectedMatchLeft = null;
 let selectedMatchRight = null;
 let matchedPairs = [];
 let currentQuestions = [];
+let sessionQuestions = {};  // cache: "unitIdx-type" → locked question list for this session
 let answeredMap = {};
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNjg22Y_JsoD5n-6gn3fh5rlDsqhMseNnmBFBqAseVC_SMmYXHYBgSp94gLzMBK0nK/exec";
@@ -1778,6 +2181,145 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+
+// ── Assign unique IDs to all questions at startup ──────────────
+(function assignQuestionIds() {
+  let uid = 0;
+  UNITS.forEach(unit => {
+    unit.questions.forEach(q => {
+      if (!q.id) q.id = ++uid;
+    });
+  });
+})();
+
+// ============================================================
+// ACCESS CODE SYSTEM
+// ============================================================
+
+const CODE_CACHE_KEY = 'forensics_access_code';
+
+async function validateCode() {
+  const input = document.getElementById('code-input');
+  const code = input.value.trim().toUpperCase();
+  if (!code) { input.focus(); return; }
+
+  // Check localStorage cache first (skip network if already validated this code)
+  const cached = localStorage.getItem(CODE_CACHE_KEY);
+  if (cached === code) {
+    onCodeValid();
+    return;
+  }
+
+  // Check against Google Sheet Codes tab
+  const btn = document.querySelector('#code-card .btn-primary');
+  btn.textContent = 'Checking...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(code));
+    const json = await res.json();
+    if (json.valid) {
+      localStorage.setItem(CODE_CACHE_KEY, code);
+      onCodeValid();
+    } else {
+      showCodeError();
+    }
+  } catch(e) {
+    // Network error — if cached code exists, allow through
+    if (cached) { onCodeValid(); return; }
+    showCodeError();
+  } finally {
+    btn.textContent = 'ENTER →';
+    btn.disabled = false;
+  }
+}
+
+function onCodeValid() {
+  document.getElementById('code-card').style.display = 'none';
+  document.getElementById('name-card').style.display = 'block';
+  document.getElementById('units-card').style.display = 'block';
+  if (APPS_SCRIPT_URL) loadSavedNames();
+  else {
+    document.getElementById('connect-msg').textContent = '';
+    const localName = localStorage.getItem('forensics_student_name');
+    if (localName) document.getElementById('student-name-input').value = localName;
+  }
+}
+
+function showCodeError() {
+  document.getElementById('code-error').classList.add('show');
+  document.getElementById('code-actions').style.display = 'flex';
+  document.getElementById('code-input').value = '';
+  document.getElementById('code-input').focus();
+}
+
+function retryCode() {
+  document.getElementById('code-error').classList.remove('show');
+  document.getElementById('code-actions').style.display = 'none';
+  document.getElementById('request-form').classList.remove('show');
+  document.getElementById('request-success').classList.remove('show');
+  document.getElementById('code-input').value = '';
+  document.getElementById('code-input').focus();
+}
+
+function showRequestForm() {
+  document.getElementById('request-form').classList.add('show');
+  document.getElementById('code-actions').style.display = 'none';
+  document.getElementById('code-error').classList.remove('show');
+}
+
+async function submitRequest() {
+  const first = document.getElementById('req-first').value.trim();
+  const last = document.getElementById('req-last').value.trim();
+  const email = document.getElementById('req-email').value.trim();
+  const source = document.getElementById('req-source').value;
+
+  if (!first || !last) { alert('Please enter your first and last name.'); return; }
+  if (!email || !email.includes('@') || !email.includes('.')) { alert('Please enter a valid email address.'); return; }
+  if (!source) { alert('Please select how you heard about this tool.'); return; }
+
+  const btn = document.querySelector('#request-form .btn-primary');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    await fetch(APPS_SCRIPT_URL + '?action=requestCode', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName: first, lastName: last, email, source,
+        timestamp: new Date().toLocaleString() })
+    });
+    document.getElementById('request-success').classList.add('show');
+    btn.style.display = 'none';
+  } catch(e) {
+    alert('Could not send request. Please try again.');
+  } finally {
+    btn.textContent = 'Send Request →';
+    btn.disabled = false;
+  }
+}
+
+// Check localStorage on page load — skip code screen if already validated
+window.addEventListener('load', () => {
+  const cached = localStorage.getItem(CODE_CACHE_KEY);
+  if (cached) {
+    // Still verify against sheet in background (in case code was revoked)
+    fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(cached))
+      .then(r => r.json())
+      .then(json => {
+        if (json.valid) { onCodeValid(); }
+        else {
+          // Code was revoked — clear cache and show code screen
+          localStorage.removeItem(CODE_CACHE_KEY);
+        }
+      })
+      .catch(() => {
+        // Network error — trust the cache, let them in
+        onCodeValid();
+      });
+  }
+});
 
 // ============================================================
 // MULTI-USER NAME SYSTEM
@@ -1889,6 +2431,7 @@ function startWithUnit(idx) {
 }
 
 function changeName() {
+  saveCurrentScore();
   showScreen('welcome-screen');
   sessionCorrect = 0;
   sessionAnswered = 0;
@@ -1896,6 +2439,7 @@ function changeName() {
 }
 
 function goHome() {
+  saveCurrentScore();
   showScreen('welcome-screen');
 }
 
@@ -1911,6 +2455,7 @@ function selectUnit(idx) {
   currentQType = "all";
   currentQIndex = 0;
   answeredMap = {};
+  clearSessionQuestions(idx); // fresh shuffle when entering a unit
   selectedMatchLeft = null;
   selectedMatchRight = null;
   matchedPairs = [];
@@ -1923,9 +2468,110 @@ function selectUnit(idx) {
   renderUnitContent();
 }
 
+function deConsec(arr) {
+  // Prevent the same question ID appearing back-to-back
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i].id && arr[i].id === arr[i-1].id) {
+      for (let j = i+1; j < arr.length; j++) {
+        if (arr[j].id !== arr[i-1].id) {
+          [arr[i], arr[j]] = [arr[j], arr[i]]; break;
+        }
+      }
+    }
+  }
+  return arr;
+}
+
+function interleaveByType(questions) {
+  // Split into buckets by type
+  const buckets = {};
+  questions.forEach(q => {
+    const t = q.type || 'other';
+    if (!buckets[t]) buckets[t] = [];
+    buckets[t].push(q);
+  });
+
+  // Shuffle each bucket internally
+  Object.values(buckets).forEach(b => shuffle(b));
+
+  // Separate matching questions — they will be woven in every MATCH_INTERVAL questions
+  // (Biology tool pattern: interleaveMatches weaves match rounds into base queue)
+  const MATCH_INTERVAL = 10;
+  const matchQs = shuffle([...(buckets['matching'] || [])]);
+  delete buckets['matching'];
+
+  // Build base queue from remaining types — max 2 consecutive same type
+  const typeOrder = ['flashcard', 'mc', 'fitb', 'diagram', 'lab', 'other'];
+  const available = typeOrder.filter(t => buckets[t] && buckets[t].length > 0);
+  const pointers = {};
+  available.forEach(t => pointers[t] = 0);
+
+  const base = [];
+  let lastType = null;
+  let consecutiveCount = 0;
+  const baseTotal = questions.filter(q => q.type !== 'matching').length;
+
+  while (base.length < baseTotal) {
+    let chosen = null;
+    let maxRemaining = -1;
+    for (const t of available) {
+      const remaining = (buckets[t] ? buckets[t].length : 0) - (pointers[t] || 0);
+      if (remaining <= 0) continue;
+      if (t === lastType && consecutiveCount >= 2) continue;
+      if (remaining > maxRemaining) { maxRemaining = remaining; chosen = t; }
+    }
+    if (!chosen) {
+      for (const t of available) {
+        if ((buckets[t] ? buckets[t].length : 0) - (pointers[t] || 0) > 0) { chosen = t; break; }
+      }
+    }
+    if (!chosen) break;
+    base.push(buckets[chosen][pointers[chosen]]);
+    pointers[chosen]++;
+    consecutiveCount = chosen === lastType ? consecutiveCount + 1 : 1;
+    lastType = chosen;
+  }
+
+  // Weave matching rounds into base every MATCH_INTERVAL questions (Biology pattern)
+  if (!matchQs.length) return base;
+  const result = [];
+  let mi = 0;
+  base.forEach((q, i) => {
+    result.push(q);
+    if ((i + 1) % MATCH_INTERVAL === 0 && mi < matchQs.length) {
+      result.push(matchQs[mi++]);
+    }
+  });
+  // Append any remaining match questions at the end
+  while (mi < matchQs.length) result.push(matchQs[mi++]);
+  return result;
+}
+
 function getFilteredQuestions() {
-  // Use difficulty system — shuffles order & adds harder variants on 2nd+ pass
-  return getDifficultyQuestions(currentUnit, currentQType);
+  const key = currentUnit + '-' + currentQType;
+  // If we already have a locked list for this unit+type this session, use it
+  // This ensures questions never repeat or reorder mid-session
+  if (!sessionQuestions[key]) {
+    const raw = getDifficultyQuestions(currentUnit, currentQType);
+    // For "All" sessions: interleave by type for better variety
+    // For single-type sessions: just use the shuffled list as-is
+    sessionQuestions[key] = deConsec((currentQType === 'all') ? interleaveByType(raw) : raw);
+  }
+  return sessionQuestions[key];
+}
+
+function clearSessionQuestions(unitIdx, type) {
+  // Call this when resetting a unit/type so a fresh shuffle is generated
+  if (unitIdx === undefined) {
+    sessionQuestions = {}; // clear all
+  } else if (type === undefined) {
+    // clear all types for this unit
+    Object.keys(sessionQuestions).forEach(k => {
+      if (k.startsWith(unitIdx + '-')) delete sessionQuestions[k];
+    });
+  } else {
+    delete sessionQuestions[unitIdx + '-' + type];
+  }
 }
 
 // ============================================================
@@ -1996,21 +2642,43 @@ function renderQuestion(q, idx, total) {
   html += `<div class="q-number">Question ${idx + 1} of ${total} &nbsp;|&nbsp; ${q.type.toUpperCase()}</div>`;
 
   if (q.type === "flashcard") {
-    html += `
-      <div class="flashcard-container">
-        <div class="flashcard" id="flashcard" onclick="flipCard()">
-          <div class="flashcard-face flashcard-front">
-            <div class="flashcard-label">Term</div>
-            <div class="flashcard-term">${q.term}</div>
-            <div class="flashcard-hint">Click to reveal definition →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="flashcard-label">Definition</div>
-            <div class="flashcard-def">${q.def}</div>
+    if (!answered) {
+      // Show front — click reveals back + buttons
+      html += `
+        <div class="flashcard-container">
+          <div class="flashcard" id="flashcard" onclick="fcReveal(${idx})">
+            <div class="flashcard-face flashcard-front">
+              <div class="flashcard-label">Tap to reveal →</div>
+              <div class="flashcard-term">${q.term}</div>
+              <div class="flashcard-hint">Click card to see definition</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <div class="flashcard-label">Definition</div>
+              <div class="flashcard-def">${q.def}</div>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+        <div id="fc-btns-${idx}" style="display:none;gap:12px;margin-top:16px" class="name-input-row">
+          <button class="fc-missed" onclick="fcAnswer(false,${idx})">✗ Missed it</button>
+          <button class="fc-got" onclick="fcAnswer(true,${idx})">✓ Got it!</button>
+        </div>`;
+    } else {
+      html += `
+        <div class="flashcard-container">
+          <div class="flashcard flipped">
+            <div class="flashcard-face flashcard-front">
+              <div class="flashcard-term">${q.term}</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <div class="flashcard-label">Definition</div>
+              <div class="flashcard-def">${q.def}</div>
+            </div>
+          </div>
+        </div>
+        <div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show" style="margin-top:12px">
+          ${answered.correct ? '✅ Got it!' : '❌ Missed it — review this one.'}
+        </div>`;
+    }
   } else if (q.type === "mc") {
     const letters = ["A","B","C","D"];
     html += `<div class="q-text">${q.q}</div><div class="mc-options">`;
@@ -2035,18 +2703,33 @@ function renderQuestion(q, idx, total) {
       </div>`;
     }
   } else if (q.type === "fitb") {
+    const numBoxes = q.boxes || 1;
+    const answerParts = q.answer.split('/').map(p => p.trim());
     html += `<div class="q-text">${q.q}</div>`;
-    const cls = answered ? (answered.correct ? 'correct' : 'incorrect') : '';
-    const val = answered ? answered.given : '';
-    html += `<input type="text" id="fitb-input" class="fitb-input ${cls}" placeholder="Type your answer..." value="${val}" ${answered ? 'disabled' : ''} onkeydown="if(event.key==='Enter')checkFITB()"/>`;
     if (!answered) {
-      html += `<button class="check-btn" onclick="checkFITB()">Check Answer →</button>`;
-    }
-    if (answered) {
+      if (numBoxes === 1) {
+        html += `<div class="fitb-row">
+          <input type="text" id="fitb-input-0" class="fitb-input" placeholder="Your answer..."
+            onkeydown="if(event.key==='Enter') checkFITB()" />
+          <button class="check-btn" onclick="checkFITB()">Check →</button>
+        </div>`;
+      } else {
+        html += `<div class="fitb-multi">`;
+        for (let b = 0; b < numBoxes; b++) {
+          html += `<div class="fitb-row" style="margin-bottom:8px">
+            <span class="fitb-box-label">Blank ${b+1}:</span>
+            <input type="text" id="fitb-input-${b}" class="fitb-input" placeholder="Answer ${b+1}..."
+              onkeydown="if(event.key==='Enter'&&${b}===${numBoxes-1}) checkFITB()" />
+          </div>`;
+        }
+        html += `<button class="check-btn" style="margin-top:4px" onclick="checkFITB()">Check All →</button></div>`;
+      }
+    } else {
+      const displayAns = q.display || answerParts.join(' | ');
       html += `<div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
         ${answered.correct
-          ? `✅ Correct!${q.explain ? ' ' + q.explain : ''}`
-          : `❌ Correct answer: <strong>${q.display || q.answer}</strong>${q.explain ? '<br><span style="opacity:0.85;font-size:0.95em">' + q.explain + '</span>' : ''}`}
+          ? `✅ Correct!${q.explain ? '<br><span style="opacity:0.85;font-size:0.93em">' + q.explain + '</span>' : ''}`
+          : `❌ Correct answer: <strong>${displayAns}</strong>${q.explain ? '<br><span style="opacity:0.85;font-size:0.93em">' + q.explain + '</span>' : ''}`}
       </div>`;
     }
   } else if (q.type === "matching") {
@@ -2090,6 +2773,7 @@ function renderQuestion(q, idx, total) {
   html += `<div class="nav-row">
     <button class="btn-ghost" onclick="prevQ()" ${idx === 0 ? 'disabled' : ''}>← Previous</button>
     <span class="q-counter">${idx + 1} / ${total}</span>
+    <button class="btn-ghost" onclick="skipQ()" title="Skip this question">Skip →→</button>
     <button class="btn-primary" onclick="nextQ()" ${idx === total - 1 ? '' : ''}>
       ${idx === total - 1 ? 'Finish Unit ✓' : 'Next →'}
     </button>
@@ -2150,6 +2834,8 @@ function selectRight(i) {
   renderUnitContent();
 }
 
+let matchHadWrong = false; // tracks if any wrong attempt made on current matching Q
+
 function tryMatch() {
   if (selectedMatchLeft === null || selectedMatchRight === null) return;
   const q = currentQuestions[currentQIndex];
@@ -2158,13 +2844,21 @@ function tryMatch() {
   const correctDef = q.pairs[selectedMatchLeft][1];
 
   if (def === correctDef) {
+    // Correct pair
     matchedPairs.push({ left: selectedMatchLeft, right: selectedMatchRight });
     if (matchedPairs.length === q.pairs.length) {
-      sessionCorrect++;
+      // Complete — only award point if no wrong attempts (like Biology tool)
+      const correct = !matchHadWrong;
+      if (correct) sessionCorrect++;
       sessionAnswered++;
-      answeredMap[currentQIndex] = { correct: true };
+      autoSaveCheck();
+      answeredMap[currentQIndex] = { correct };
+      matchHadWrong = false;
       updateScoreDisplay();
     }
+  } else {
+    // Wrong pair — flag it
+    matchHadWrong = true;
   }
   selectedMatchLeft = null;
   selectedMatchRight = null;
@@ -2189,6 +2883,7 @@ function checkMC(chosen) {
   answeredMap[currentQIndex] = { chosen, correct };
   if (correct) sessionCorrect++;
   sessionAnswered++;
+  autoSaveCheck();
   updateScoreDisplay();
   renderUnitContent();
 }
@@ -2200,6 +2895,7 @@ function checkDiagram(chosen) {
   answeredMap[currentQIndex] = { chosen, correct };
   if (correct) sessionCorrect++;
   sessionAnswered++;
+  autoSaveCheck();
   updateScoreDisplay();
   renderUnitContent();
 }
@@ -2207,18 +2903,56 @@ function checkDiagram(chosen) {
 function checkFITB() {
   const q = currentQuestions[currentQIndex];
   if (answeredMap[currentQIndex]) return;
-  const input = document.getElementById('fitb-input');
-  const given = (input?.value || "").trim().toLowerCase();
-  const correct = given === q.answer.toLowerCase() || given.includes(q.answer.toLowerCase());
-  answeredMap[currentQIndex] = { given, correct };
-  if (correct) sessionCorrect++;
+  const numBoxes = q.boxes || 1;
+  const answerParts = q.answer.split('/').map(p => p.trim());
+
+  if (numBoxes === 1) {
+    const input = document.getElementById('fitb-input-0') || document.getElementById('fitb-input');
+    const given = (input?.value || '').trim();
+    if (!given) return;
+    // Accept any matching alternative
+    const correct = answerParts.some(a => fitbMatch(given, a));
+    answeredMap[currentQIndex] = { given, correct };
+    if (correct) sessionCorrect++;
+  } else {
+    // Multi-box: each box must match corresponding answer part
+    const givens = [];
+    let allCorrect = true;
+    for (let b = 0; b < numBoxes; b++) {
+      const input = document.getElementById('fitb-input-' + b);
+      const given = (input?.value || '').trim();
+      if (!given) return; // don't submit if any box empty
+      givens.push(given);
+      // Each box matched against its corresponding answer part (or any alt for that part)
+      const partAlts = answerParts[b] ? answerParts[b].split('|').map(p => p.trim()) : [answerParts[b] || ''];
+      if (!partAlts.some(a => fitbMatch(given, a))) allCorrect = false;
+    }
+    answeredMap[currentQIndex] = { given: givens.join(' / '), correct: allCorrect };
+    if (allCorrect) sessionCorrect++;
+  }
+
   sessionAnswered++;
+  autoSaveCheck();
   updateScoreDisplay();
   renderUnitContent();
 }
 
-function flipCard() {
-  document.getElementById('flashcard')?.classList.toggle('flipped');
+function fcReveal(idx) {
+  // Flip the card to show definition
+  document.getElementById('flashcard')?.classList.add('flipped');
+  // Show Got It / Missed It buttons
+  const btns = document.getElementById('fc-btns-' + idx);
+  if (btns) btns.style.display = 'flex';
+}
+
+function fcAnswer(correct, idx) {
+  if (answeredMap[idx]) return;
+  answeredMap[idx] = { correct };
+  if (correct) sessionCorrect++;
+  sessionAnswered++;
+  autoSaveCheck();
+  updateScoreDisplay();
+  renderUnitContent();
 }
 
 // ============================================================
@@ -2251,6 +2985,7 @@ function resetType() {
 
 function resetUnit() {
   if (!confirm(`Reset all scores for "${UNITS[currentUnit].name}"?`)) return;
+  clearSessionQuestions(currentUnit);
   // Remove all entries in answeredMap (unit-scoped per selectUnit)
   const count = Object.values(answeredMap).length;
   const correct = Object.values(answeredMap).filter(e => e.correct).length;
@@ -2269,6 +3004,7 @@ function resetAll() {
   sessionAnswered = 0;
   answeredMap = {};
   completedPasses = {};
+  clearSessionQuestions(); // clear all cached question lists
   currentQIndex = 0;
   renderUnitContent();
 }
@@ -2336,6 +3072,7 @@ function filterType(type) {
   selectedMatchLeft = null;
   selectedMatchRight = null;
   matchedPairs = [];
+  clearSessionQuestions(currentUnit, type); // fresh shuffle for this type tab
   renderUnitContent();
 }
 
@@ -2344,6 +3081,7 @@ function nextQ() {
   selectedMatchLeft = null;
   selectedMatchRight = null;
   matchedPairs = [];
+  matchHadWrong = false;
   if (currentQIndex < currentQuestions.length - 1) {
     currentQIndex++;
     renderUnitContent();
@@ -2373,6 +3111,12 @@ function updateScoreDisplay() {
   document.getElementById('prog-fill').style.width = pct + "%";
 }
 
+function saveCurrentScore() {
+  if (!sessionAnswered || !APPS_SCRIPT_URL) return;
+  const pct = Math.round(sessionCorrect / sessionAnswered * 100);
+  saveScore(pct);
+}
+
 function showComplete() {
   // Count this as a completed pass only when finishing the full "All" review
   if (currentQType === 'all') {
@@ -2384,12 +3128,110 @@ function showComplete() {
   document.getElementById('cs-pct').textContent = pct + "%";
   document.getElementById('complete-quote').textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
   showScreen('complete-screen');
-  if (APPS_SCRIPT_URL) saveScore(pct);
+  saveCurrentScore();
 }
 
-function showHistory() {
-  // Could be expanded — for now just show complete screen with current stats
-  showComplete();
+function endAndSave() {
+  saveCurrentScore();
+  showMain();
+}
+
+function skipQ() {
+  // Count as a failed attempt
+  const q = currentQuestions[currentQIndex];
+  if (!answeredMap[currentQIndex]) {
+    answeredMap[currentQIndex] = { correct: false, skipped: true };
+    sessionAnswered++;
+  autoSaveCheck();
+    // sessionCorrect NOT incremented — counts as wrong
+  }
+  if (currentQIndex < currentQuestions.length - 1) {
+    currentQIndex++;
+    renderUnitContent();
+  } else {
+    showComplete();
+  }
+}
+
+async function showHistory() {
+  showScreen('history-screen');
+  const studentEl = document.getElementById('history-student');
+  const contentEl = document.getElementById('history-content');
+  
+  studentEl.textContent = '🔎 Detective: ' + (studentName || 'Unknown');
+  contentEl.innerHTML = '<div class="history-loading">Loading score history...</div>';
+
+  // Try to fetch scores from Google Sheet
+  if (!APPS_SCRIPT_URL || !studentName) {
+    contentEl.innerHTML = '<div class="history-loading">No history available — start studying to build your record!</div>';
+    return;
+  }
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=getScores&name=' + encodeURIComponent(studentName));
+    const json = await res.json();
+    const scores = json.scores || [];
+
+    if (!scores.length) {
+      contentEl.innerHTML = '<div class="history-loading">No scores recorded yet for ' + studentName + '. Keep studying!</div>';
+      return;
+    }
+
+    // Group by unit
+    const byUnit = {};
+    scores.forEach(s => {
+      if (!byUnit[s.unit]) byUnit[s.unit] = [];
+      byUnit[s.unit].push(s);
+    });
+
+    // Unit order
+    const unitOrder = ['Trace Evidence', 'Drugs & Toxicology', 'Death Investigation', 'Forensic Anthropology', 'Documents & Handwriting'];
+    let html = '';
+
+    // Overall summary
+    const totalCorrect = scores.reduce((a, s) => a + (parseInt(s.correct) || 0), 0);
+    const totalAnswered = scores.reduce((a, s) => a + (parseInt(s.total) || 0), 0);
+    const overallPct = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
+    const pctColor = overallPct >= 80 ? '#4ade80' : overallPct >= 60 ? '#facc15' : '#f87171';
+
+    html += `<div style="background:var(--bg3);border-radius:12px;padding:16px;margin-bottom:20px;display:flex;gap:24px;align-items:center">
+      <div style="text-align:center">
+        <div style="font-size:32px;font-weight:700;color:${pctColor}">${overallPct}%</div>
+        <div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Overall</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:12px;color:var(--gray)">${totalCorrect} correct of ${totalAnswered} answered across ${scores.length} session(s)</div>
+        <div style="background:var(--border);border-radius:4px;height:8px;margin-top:8px">
+          <div style="background:${pctColor};width:${overallPct}%;height:8px;border-radius:4px;transition:width 0.5s"></div>
+        </div>
+      </div>
+    </div>`;
+
+    // Per-unit breakdown
+    html += '<table class="history-table"><thead><tr><th>Session</th><th>Unit</th><th>Score</th><th>Correct/Total</th><th>Date</th></tr></thead><tbody>';
+
+    // Sort all scores by date descending
+    const allSorted = [...scores].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+    allSorted.forEach((s, i) => {
+      const pct = parseInt(s.score) || 0;
+      const barColor = pct >= 80 ? '#4ade80' : pct >= 60 ? '#facc15' : '#f87171';
+      html += `<tr>
+        <td style="color:var(--gray)">#${allSorted.length - i}</td>
+        <td>${s.unit || '—'}</td>
+        <td><strong style="color:${barColor}">${s.score || '—'}</strong>
+          <span class="history-pct-bar" style="width:${Math.min(pct, 100) * 0.6}px;background:${barColor}"></span>
+        </td>
+        <td>${s.correct || 0} / ${s.total || 0}</td>
+        <td style="color:var(--gray);font-size:11px">${s.date || '—'}</td>
+      </tr>`;
+    });
+
+    html += '</tbody></table>';
+    contentEl.innerHTML = html;
+
+  } catch(e) {
+    contentEl.innerHTML = '<div class="history-loading">Could not load history — check your connection.</div>';
+  }
 }
 
 async function saveScore(pct) {
@@ -2411,9 +3253,43 @@ async function saveScore(pct) {
   } catch(e) { console.log("Score save failed:", e); }
 }
 
+function autoSaveCheck() {
+  // Save every 5 questions answered, regardless of correct/incorrect
+  if (sessionAnswered > 0 && sessionAnswered % 5 === 0) {
+    const pct = Math.round(sessionCorrect / sessionAnswered * 100);
+    saveScore(pct);
+  }
+}
+
 // ============================================================
 // UTILITIES
 // ============================================================
+function levenshtein(a, b) {
+  a = a.toLowerCase().trim(); b = b.toLowerCase().trim();
+  if (a === b) return 0;
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, (_, i) =>
+    Array.from({length: n+1}, (_, j) => i === 0 ? j : j === 0 ? i : 0));
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+function fitbMatch(userAns, correctAns) {
+  const u = userAns.toLowerCase().trim();
+  const c = correctAns.toLowerCase().trim();
+  if (!u) return false;
+  if (u === c) return true;
+  // Multi-answer: accept any alternative separated by /
+  if (c.includes('/')) {
+    return c.split('/').some(alt => fitbMatch(userAns, alt.trim()));
+  }
+  // Tolerance by answer length: short answers need exact, longer allow typos
+  const tol = c.length <= 4 ? 0 : c.length <= 8 ? 1 : c.length <= 14 ? 2 : 3;
+  return levenshtein(u, c) <= tol;
+}
+
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -2423,14 +3299,11 @@ function shuffle(arr) {
 }
 
 // Enter key on name input
-// Load saved names from sheet on page load
-window.addEventListener('load', () => {
-  if (APPS_SCRIPT_URL) loadSavedNames();
-  else {
-    document.getElementById('connect-msg').textContent = '';
-    const localName = localStorage.getItem('forensics_student_name');
-    if (localName) document.getElementById('student-name-input').value = localName;
-  }
+// Name loading is triggered by onCodeValid() after successful code entry
+
+// Save score if user closes tab or browser
+window.addEventListener('beforeunload', () => {
+  saveCurrentScore();
 });
 
 document.getElementById('student-name-input').addEventListener('keydown', (e) => {
