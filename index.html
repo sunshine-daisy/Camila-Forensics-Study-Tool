@@ -2660,11 +2660,83 @@ function changeName() {
 }
 
 function updateSidebarScores() {
+  // updateHomeRings handles both rings AND sidebar via updateSidebarScoresFromStored
+  // Just call updateHomeRings which fetches from Sheet if needed
+  updateHomeRings();
+}
+
+function updateAllScoreDisplays() {
+  updateHomeRings();
+  updateSidebarScores();
+}
+
+async function updateHomeRings() {
+  const circ = 125.7;
   const name = studentName || localStorage.getItem('forensics_student_name') || 'unknown';
+
+  // Try localStorage first (fast), then fall back to Sheet (accurate across devices)
   const key = 'forensics_scores_' + name;
   let stored = {};
   try { stored = JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) {}
 
+  // Check if we have any local data
+  const hasLocal = Object.values(stored).some(arr => arr && arr.length > 0);
+
+  if (!hasLocal && APPS_SCRIPT_URL && name !== 'unknown') {
+    // Fetch from Google Sheet
+    try {
+      const res = await fetch(APPS_SCRIPT_URL + '?action=getScores&name=' + encodeURIComponent(name));
+      const json = await res.json();
+      if (json.scores && json.scores.length) {
+        // Build stored structure from sheet data
+        const unitNameMap = {
+          'Trace Evidence': 0, 'Drugs & Toxicology': 1, 'Drugs & Tox': 1,
+          'Death Investigation': 2, 'Death Invest': 2,
+          'Forensic Anthropology': 3, 'Anthropology': 3,
+          'Documents & Handwriting': 4, 'Documents': 4
+        };
+        json.scores.forEach(s => {
+          const idx = unitNameMap[s.unit];
+          if (idx === undefined) return;
+          if (!stored['unit' + idx]) stored['unit' + idx] = [];
+          const pctNum = parseInt((s.score || '0').replace('%', ''));
+          const correct = parseInt(s.correct) || 0;
+          const total = parseInt(s.total) || 0;
+          if (total > 0) stored['unit' + idx].push({ correct, total, pct: pctNum });
+        });
+        // Cache to localStorage for next time
+        try { localStorage.setItem(key, JSON.stringify(stored)); } catch(e) {}
+      }
+    } catch(e) { /* network error, show 0% */ }
+  }
+
+  // Now render rings
+  const unitNames = ['Trace Evidence','Drugs & Toxicology','Death Investigation','Forensic Anthropology','Documents & Handwriting'];
+  for (let i = 0; i < 5; i++) {
+    const ring = document.getElementById('home-ring-' + i);
+    const pctEl = document.getElementById('home-pct-' + i);
+    if (!ring || !pctEl) continue;
+    const sessions = stored['unit' + i] || [];
+    if (!sessions.length) {
+      ring.style.strokeDashoffset = circ;
+      pctEl.textContent = '0%';
+      pctEl.style.color = 'rgba(255,255,255,0.25)';
+      continue;
+    }
+    const totalCorrect = sessions.reduce((a, s) => a + (s.correct || 0), 0);
+    const totalAnswered = sessions.reduce((a, s) => a + (s.total || 0), 0);
+    const pct = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
+    const offset = circ - (circ * pct / 100);
+    ring.style.strokeDashoffset = offset;
+    ring.style.transition = 'stroke-dashoffset 0.8s ease';
+    pctEl.textContent = pct + '%';
+    pctEl.style.color = pct >= 80 ? '#4ade80' : pct >= 60 ? '#facc15' : 'var(--pink)';
+  }
+  // Also update sidebar
+  updateSidebarScoresFromStored(stored);
+}
+
+function updateSidebarScoresFromStored(stored) {
   for (let i = 0; i < 5; i++) {
     const scoreEl = document.getElementById('uscore-' + i);
     if (!scoreEl) continue;
@@ -2674,42 +2746,6 @@ function updateSidebarScores() {
     const totalAnswered = sessions.reduce((a, s) => a + (s.total || 0), 0);
     const pct = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
     scoreEl.textContent = pct + '%';
-  }
-}
-
-function updateAllScoreDisplays() {
-  updateHomeRings();
-  updateSidebarScores();
-}
-
-function updateHomeRings() {
-  const circ = 125.7;
-  const name = studentName || localStorage.getItem('forensics_student_name') || 'unknown';
-  const key = 'forensics_scores_' + name;
-  let stored = {};
-  try { stored = JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) {}
-
-  for (let i = 0; i < 5; i++) {
-    const ring = document.getElementById('home-ring-' + i);
-    const pctEl = document.getElementById('home-pct-' + i);
-    if (!ring || !pctEl) continue;
-
-    const sessions = stored['unit' + i] || [];
-    if (!sessions.length) {
-      ring.style.strokeDashoffset = circ;
-      pctEl.textContent = '0%';
-      pctEl.style.color = 'rgba(255,255,255,0.25)';
-      continue;
-    }
-    // Aggregate correct/total across ALL sessions for this unit (matches history screen)
-    const totalCorrect = sessions.reduce((a, s) => a + (s.correct || 0), 0);
-    const totalAnswered = sessions.reduce((a, s) => a + (s.total || 0), 0);
-    const pct = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
-    const offset = circ - (circ * pct / 100);
-    ring.style.strokeDashoffset = offset;
-    ring.style.transition = 'stroke-dashoffset 0.8s ease';
-    pctEl.textContent = pct + '%';
-    pctEl.style.color = pct >= 80 ? '#4ade80' : pct >= 60 ? '#facc15' : 'var(--pink)';
   }
 }
 
