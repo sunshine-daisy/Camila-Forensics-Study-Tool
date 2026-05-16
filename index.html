@@ -1118,8 +1118,9 @@ body::before {
         ❌ Invalid code. Try again or request access below.
       </div>
       <div class="name-input-row">
-        <input type="text" id="code-input" class="name-input" placeholder="Enter your code..."
+        <input type="text" id="code-input" class="name-input" placeholder="Enter access code..."
           style="text-transform:uppercase;letter-spacing:3px;"
+          autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
           onkeydown="if(event.key==='Enter') validateCode()" />
         <button class="btn-primary" onclick="validateCode()">ENTER →</button>
       </div>
@@ -2198,51 +2199,99 @@ function showScreen(id) {
 
 const CODE_CACHE_KEY = 'forensics_access_code';
 
+// JSONP-style code check — works around CORS limitations with Apps Script
+function checkCodeViaScript(code) {
+  return new Promise((resolve, reject) => {
+    const callbackName = 'codeCheck_' + Date.now();
+    const timeout = setTimeout(() => {
+      delete window[callbackName];
+      if (document.getElementById('jsonp-script')) {
+        document.getElementById('jsonp-script').remove();
+      }
+      reject(new Error('timeout'));
+    }, 8000);
+
+    window[callbackName] = function(json) {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      if (document.getElementById('jsonp-script')) {
+        document.getElementById('jsonp-script').remove();
+      }
+      // Return both valid flag AND name linked to the code
+      resolve({ valid: json.valid === true, name: json.name || null });
+    };
+
+    const script = document.createElement('script');
+    script.id = 'jsonp-script';
+    script.src = APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(code) + '&callback=' + callbackName;
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      reject(new Error('script error'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
 async function validateCode() {
   const input = document.getElementById('code-input');
   const code = input.value.trim().toUpperCase();
   if (!code) { input.focus(); return; }
 
-  // Check localStorage cache first (skip network if already validated this code)
+  // Check localStorage cache first
   const cached = localStorage.getItem(CODE_CACHE_KEY);
   if (cached === code) {
     onCodeValid();
     return;
   }
 
-  // Check against Google Sheet Codes tab
   const btn = document.querySelector('#code-card .btn-primary');
   btn.textContent = 'Checking...';
   btn.disabled = true;
 
   try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(code));
-    const json = await res.json();
-    if (json.valid) {
+    // Use script tag injection (JSONP-style) to bypass CORS for code verification
+    // This works reliably with Apps Script regardless of CORS settings
+    const result = await checkCodeViaScript(code);
+    if (result.valid) {
       localStorage.setItem(CODE_CACHE_KEY, code);
-      onCodeValid();
+      // Also cache the linked name so returning users are auto-identified
+      if (result.name) localStorage.setItem('forensics_student_name', result.name);
+      onCodeValid(result.name);
     } else {
       showCodeError();
     }
   } catch(e) {
-    // Network error — if cached code exists, allow through
     if (cached) { onCodeValid(); return; }
-    showCodeError();
+    document.getElementById('code-error').textContent = '⚠️ Could not reach server. Check your connection and try again.';
+    document.getElementById('code-error').classList.add('show');
+    document.getElementById('code-actions').style.display = 'flex';
   } finally {
     btn.textContent = 'ENTER →';
     btn.disabled = false;
   }
 }
 
-function onCodeValid() {
+function onCodeValid(codeLinkedName) {
   document.getElementById('code-card').style.display = 'none';
-  document.getElementById('name-card').style.display = 'block';
-  document.getElementById('units-card').style.display = 'block';
-  if (APPS_SCRIPT_URL) loadSavedNames();
-  else {
-    document.getElementById('connect-msg').textContent = '';
+
+  if (codeLinkedName) {
+    // Name is tied to the code — skip name screen entirely
+    setStudentName(codeLinkedName);
+    document.getElementById('name-card').style.display = 'none';
+    document.getElementById('units-card').style.display = 'block';
+    showScreen('main-screen');
+    selectUnit(0);
+  } else {
+    // No name tied to code — show name entry as fallback
+    document.getElementById('name-card').style.display = 'block';
+    document.getElementById('units-card').style.display = 'block';
     const localName = localStorage.getItem('forensics_student_name');
-    if (localName) document.getElementById('student-name-input').value = localName;
+    if (localName) {
+      setStudentName(localName);
+      document.getElementById('student-name-input').value = localName;
+    }
+    if (APPS_SCRIPT_URL) loadSavedNames();
   }
 }
 
@@ -2305,18 +2354,21 @@ window.addEventListener('load', () => {
   const cached = localStorage.getItem(CODE_CACHE_KEY);
   if (cached) {
     // Still verify against sheet in background (in case code was revoked)
-    fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(cached))
-      .then(r => r.json())
-      .then(json => {
-        if (json.valid) { onCodeValid(); }
-        else {
-          // Code was revoked — clear cache and show code screen
+    // Use JSONP for background check too
+    checkCodeViaScript(cached)
+      .then(result => {
+        if (result.valid) {
+          if (result.name) localStorage.setItem('forensics_student_name', result.name);
+          onCodeValid(result.name);
+        } else {
+          // Code was revoked — clear cache, force re-entry
           localStorage.removeItem(CODE_CACHE_KEY);
         }
       })
       .catch(() => {
-        // Network error — trust the cache, let them in
-        onCodeValid();
+        // Network error — trust cached code, use cached name
+        const cachedName = localStorage.getItem('forensics_student_name');
+        onCodeValid(cachedName);
       });
   }
 });
