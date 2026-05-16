@@ -912,17 +912,32 @@ body::before {
 
 /* FEEDBACK */
 .feedback {
-  border-radius: 10px;
-  padding: 14px 18px;
-  font-size: 11px;
-  margin-top: 12px;
+  border-radius: 0;
+  padding: 12px 4px 4px 4px;
+  font-size: 12px;
+  margin-top: 16px;
   display: none;
-  align-items: flex-start;
-  gap: 10px;
+  flex-direction: column;
+  gap: 6px;
+  border: none;
+  background: transparent;
 }
 .feedback.show { display: flex; }
-.feedback.correct { background: rgba(52,211,153,0.1); border: 1px solid var(--success); color: var(--success); }
-.feedback.incorrect { background: rgba(248,113,113,0.1); border: 1px solid var(--danger); color: var(--danger); }
+.feedback.correct { color: var(--success); }
+.feedback.incorrect { color: var(--danger); }
+.feedback-result {
+  font-weight: 600;
+  font-size: 13px;
+}
+.feedback-explain {
+  color: rgba(255,255,255,0.45);
+  font-size: 11px;
+  line-height: 1.6;
+  font-weight: 400;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
 
 .check-btn {
   background: var(--bg3);
@@ -2281,6 +2296,9 @@ function retryCode() {
   document.getElementById('request-form').classList.remove('show');
   document.getElementById('request-success').classList.remove('show');
   document.getElementById('code-input').value = '';
+  // Restore code input row and title
+  document.querySelector('.name-input-row').style.display = 'flex';
+  document.querySelector('.code-card h3').textContent = '🔒 Enter Access Code';
   document.getElementById('code-input').focus();
 }
 
@@ -2288,6 +2306,9 @@ function showRequestForm() {
   document.getElementById('request-form').classList.add('show');
   document.getElementById('code-actions').style.display = 'none';
   document.getElementById('code-error').classList.remove('show');
+  // Hide the code input row — not needed while requesting access
+  document.querySelector('.name-input-row').style.display = 'none';
+  document.querySelector('.code-card h3').textContent = '📨 Request Access';
 }
 
 async function submitRequest() {
@@ -2701,8 +2722,9 @@ function renderQuestion(q, idx, total) {
             </div>
           </div>
         </div>
-        <div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show" style="margin-top:12px">
-          ${answered.correct ? '✅ Got it!' : '❌ Missed it — review this one.'}
+        <div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
+          <span class="feedback-result">${answered.correct ? '✅ Got it!' : '❌ Missed it — review this one.'}</span>
+          ${q.def ? '<div class=\"feedback-explain\">' + q.def + '</div>' : ''}
         </div>`;
     }
   } else if (q.type === "mc") {
@@ -2724,8 +2746,8 @@ function renderQuestion(q, idx, total) {
     if (answered) {
       html += `<div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
         ${answered.correct
-          ? `✅ Correct! ${q.explain}`
-          : `❌ Not quite. The correct answer is <strong>${q.options[q._correctShuffled] || q.options[q.correct]}</strong>.<br><span style="opacity:0.85;font-size:0.95em">${q.explain}</span>`}
+          ? `<span class="feedback-result">✅ Correct!</span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`
+          : `<span class="feedback-result">❌ Not quite — correct answer: <strong>${q.options[q._correctShuffled] || q.options[q.correct]}</strong></span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`}
       </div>`;
     }
   } else if (q.type === "fitb") {
@@ -2754,8 +2776,8 @@ function renderQuestion(q, idx, total) {
       const displayAns = q.display || answerParts.join(' | ');
       html += `<div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
         ${answered.correct
-          ? `✅ Correct!${q.explain ? '<br><span style="opacity:0.85;font-size:0.93em">' + q.explain + '</span>' : ''}`
-          : `❌ Correct answer: <strong>${displayAns}</strong>${q.explain ? '<br><span style="opacity:0.85;font-size:0.93em">' + q.explain + '</span>' : ''}`}
+          ? `<span class="feedback-result">✅ Correct!</span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`
+          : `<span class="feedback-result">❌ Correct answer: <strong>${displayAns}</strong></span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`}
       </div>`;
     }
   } else if (q.type === "matching") {
@@ -2789,7 +2811,7 @@ function renderQuestion(q, idx, total) {
     if (answered) {
       html += `<div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
         ${answered.correct
-          ? `✅ Correct! ${q.explain}`
+          ? `<span class="feedback-result">✅ Correct!</span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`
           : `❌ Not quite. The correct answer is <strong>${q._shuffled ? q._shuffled[q._correctShuffled] : q.options[q.correct]}</strong>.<br><span style="opacity:0.85;font-size:0.95em">${q.explain}</span>`}
       </div>`;
     }
