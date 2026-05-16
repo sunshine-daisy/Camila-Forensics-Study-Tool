@@ -58,19 +58,18 @@ body::before {
 /* ===================== WELCOME SCREEN ===================== */
 #welcome-screen {
   align-items: center;
-  justify-content: flex-start;
-  padding: 4px 16px 8px;
+  justify-content: center;
+  padding: 16px;
   background: radial-gradient(ellipse at 50% 0%, rgba(255,45,120,0.12) 0%, transparent 60%);
 }
 
 .welcome-inner {
-  max-width: 620px;
+  max-width: 580px;
   width: 100%;
   text-align: center;
 }
 
 .crime-tape {
-  display: none;
   background: #f5d000;
   color: #000;
   font-family: Arial, 'Helvetica Neue', sans-serif;
@@ -96,7 +95,7 @@ body::before {
   white-space: nowrap;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   background: linear-gradient(135deg, #fff 0%, var(--pink-light) 50%, var(--pink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -899,21 +898,92 @@ body::before {
   margin-bottom: 16px;
   letter-spacing: 0.5px;
 }
-.diagram-img.img-expanded {
+
+/* LIGHTBOX — replaces the old img-expanded */
+#diagram-lightbox {
+  display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 92vw;
-  max-height: 88vh;
-  width: auto;
-  height: auto;
-  z-index: 999;
-  border: 2px solid var(--pink);
-  border-radius: 12px;
-  box-shadow: 0 0 0 9999px rgba(0,0,0,0.82);
-  cursor: zoom-out;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  touch-action: none;
 }
+#diagram-lightbox.open { display: flex; }
+#lightbox-toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(0,0,0,0.6);
+  z-index: 10000;
+  flex-shrink: 0;
+}
+#lightbox-toolbar .lb-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
+#lightbox-toolbar .lb-close {
+  background: var(--pink);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  font-family: 'DM Sans', sans-serif;
+}
+#lightbox-scroll {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+#lightbox-img {
+  max-width: none;
+  max-height: none;
+  width: var(--lb-w, auto);
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  transform-origin: top left;
+  cursor: default;
+  transition: width 0.15s;
+}
+#lightbox-zoom-btns {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10001;
+}
+#lightbox-zoom-btns button {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+#lightbox-zoom-btns button:hover { background: rgba(255,45,120,0.4); }
 
 .img-placeholder {
   background: var(--bg3);
@@ -1134,7 +1204,6 @@ body::before {
 <!-- ===== WELCOME SCREEN ===== -->
 <div id="welcome-screen" class="screen active">
   <div class="welcome-inner">
-    <div class="crime-tape">⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠</div>
     <h1 class="welcome-title">FORENSIC &nbsp;🔬&nbsp; SCIENCE</h1>
     <p class="welcome-subtitle">Honors Forensic Science • Ms. Makley • Zionsville</p>
 
@@ -1144,6 +1213,7 @@ body::before {
 
     <!-- ACCESS CODE CARD (shown first) -->
     <div class="code-card" id="code-card">
+      <div class="crime-tape" style="margin:-16px -20px 14px;border-radius:8px 8px 0 0;width:calc(100% + 40px);">⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠</div>
       <h3>🔒 Enter Access Code</h3>
       <div class="code-error" id="code-error">
         ❌ Invalid code. Try again or request access below.
@@ -2977,8 +3047,8 @@ function renderQuestion(q, idx, total) {
     html += `
       <img class="diagram-img" src="${q.img}" alt="${q.imgAlt}"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-        onclick="this.classList.toggle('img-expanded')" title="Click to expand"/>
-      <div class="diagram-img-hint">🔍 Tap image to expand</div>
+        onclick="openLightbox(this.src)" title="Tap to expand"/>
+      <div class="diagram-img-hint">🔍 Tap image to expand · + / − to zoom</div>
       <div class="img-placeholder" style="display:none">
         <span class="ph-icon">🖼</span>
         <strong>${q.imgAlt}</strong>
@@ -3380,6 +3450,100 @@ function endAndSave() {
   setTimeout(updateHomeRings, 150);
 }
 
+// ============================================================
+// DIAGRAM LIGHTBOX with zoom + scroll
+// ============================================================
+let lbScale = 1;
+const LB_MIN = 0.5;
+const LB_MAX = 5;
+const LB_STEP = 0.4;
+
+function openLightbox(src) {
+  const lb = document.getElementById('diagram-lightbox');
+  const img = document.getElementById('lightbox-img');
+  const scroll = document.getElementById('lightbox-scroll');
+  img.src = src;
+  lbScale = 1;
+  // Set initial width to fit screen width comfortably
+  const initW = Math.min(window.innerWidth - 32, 900);
+  img.style.width = initW + 'px';
+  lb.classList.add('open');
+  // Scroll to top
+  scroll.scrollTop = 0;
+  scroll.scrollLeft = 0;
+  // Close on background click (not on image)
+  lb.onclick = (e) => { if (e.target === lb || e.target === scroll) closeLightbox(); };
+  // Keyboard
+  document.addEventListener('keydown', lbKeydown);
+  // Pinch-to-zoom
+  lbAddPinch(scroll, img);
+}
+
+function closeLightbox() {
+  document.getElementById('diagram-lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.removeEventListener('keydown', lbKeydown);
+}
+
+function lbZoom(dir) {
+  const img = document.getElementById('lightbox-img');
+  const scroll = document.getElementById('lightbox-scroll');
+  const currentW = img.offsetWidth;
+  const containerW = scroll.offsetWidth;
+  const containerH = scroll.offsetHeight;
+
+  if (dir === 0) {
+    // Reset to fit width
+    img.style.width = Math.min(containerW - 32, 900) + 'px';
+    scroll.scrollTop = 0;
+    scroll.scrollLeft = 0;
+    return;
+  }
+
+  const newW = Math.max(containerW * LB_MIN, Math.min(currentW * (1 + dir * LB_STEP), containerW * LB_MAX));
+  // Keep center point stable during zoom
+  const cx = scroll.scrollLeft + containerW / 2;
+  const cy = scroll.scrollTop + containerH / 2;
+  const ratio = newW / currentW;
+  img.style.width = newW + 'px';
+  scroll.scrollLeft = cx * ratio - containerW / 2;
+  scroll.scrollTop = cy * ratio - containerH / 2;
+}
+
+function lbKeydown(e) {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === '+' || e.key === '=') lbZoom(1);
+  if (e.key === '-') lbZoom(-1);
+  if (e.key === '0') lbZoom(0);
+}
+
+function lbAddPinch(scroll, img) {
+  let lastDist = null;
+  scroll.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      lastDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+  }, { passive: true });
+  scroll.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2 && lastDist) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const delta = dist / lastDist;
+      const currentW = img.offsetWidth;
+      const containerW = scroll.offsetWidth;
+      const newW = Math.max(containerW * LB_MIN, Math.min(currentW * delta, containerW * LB_MAX));
+      img.style.width = newW + 'px';
+      lastDist = dist;
+    }
+  }, { passive: true });
+  scroll.addEventListener('touchend', () => { lastDist = null; }, { passive: true });
+}
+
 function skipQ() {
   // Count as a failed attempt
   const q = currentQuestions[currentQIndex];
@@ -3579,5 +3743,21 @@ document.getElementById('student-name-input').addEventListener('keydown', (e) =>
   if (e.key === 'Enter') startSession();
 });
 </script>
+<!-- DIAGRAM LIGHTBOX -->
+<div id="diagram-lightbox">
+  <div id="lightbox-toolbar">
+    <span class="lb-hint">📐 Pinch or use + / − to zoom · Scroll to pan</span>
+    <button class="lb-close" onclick="closeLightbox()">✕ Close</button>
+  </div>
+  <div id="lightbox-scroll">
+    <img id="lightbox-img" src="" alt="Diagram" />
+  </div>
+  <div id="lightbox-zoom-btns">
+    <button onclick="lbZoom(-1)" title="Zoom out">−</button>
+    <button onclick="lbZoom(0)" title="Reset">⊙</button>
+    <button onclick="lbZoom(1)" title="Zoom in">+</button>
+  </div>
+</div>
+
 </body>
 </html>
