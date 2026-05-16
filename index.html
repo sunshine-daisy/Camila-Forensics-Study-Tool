@@ -1321,7 +1321,7 @@ body::before {
 
 <!-- HISTORY SCREEN -->
 <div id="history-screen" class="screen">
-  <div class="complete-inner" style="max-width:680px">
+  <div class="complete-inner" style="max-width:780px;margin:0 auto;padding:32px 24px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h2 style="font-family:'Oswald',sans-serif;font-size:22px;color:var(--pink);margin:0">📊 Score History</h2>
       <button class="btn-ghost" onclick="showMain()">← Back</button>
@@ -2479,10 +2479,12 @@ function startWithUnit(idx) {
 
 function changeName() {
   saveCurrentScore();
-  showScreen('welcome-screen');
   sessionCorrect = 0;
   sessionAnswered = 0;
   answeredMap = {};
+  clearSessionQuestions();
+  completedPasses = {};
+  showScreen('welcome-screen');
 }
 
 function goHome() {
@@ -2502,6 +2504,8 @@ function selectUnit(idx) {
   currentQType = "all";
   currentQIndex = 0;
   answeredMap = {};
+  sessionCorrect = 0;
+  sessionAnswered = 0;
   clearSessionQuestions(idx); // fresh shuffle when entering a unit
   selectedMatchLeft = null;
   selectedMatchRight = null;
@@ -3181,6 +3185,10 @@ function showComplete() {
 
 function endAndSave() {
   saveCurrentScore();
+  // Reset session so score ring shows 0% fresh on next unit
+  sessionCorrect = 0;
+  sessionAnswered = 0;
+  answeredMap = {};
   showMain();
 }
 
@@ -3261,16 +3269,27 @@ async function showHistory() {
     // Sort all scores by date descending
     const allSorted = [...scores].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
     allSorted.forEach((s, i) => {
-      const pct = parseInt(s.score) || 0;
+      // Score may be stored as "9%" or "0.09" — normalize to integer %
+      const rawScore = s.score || '0%';
+      const pct = rawScore.includes('%')
+        ? parseInt(rawScore)
+        : Math.round(parseFloat(rawScore) * (parseFloat(rawScore) <= 1 ? 100 : 1));
+      const pctDisplay = pct + '%';
       const barColor = pct >= 80 ? '#4ade80' : pct >= 60 ? '#facc15' : '#f87171';
+      // Format date cleanly
+      let dateStr = s.date || s.timestamp || '—';
+      try {
+        const d = new Date(s.timestamp);
+        if (!isNaN(d)) dateStr = d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
+      } catch(e) {}
       html += `<tr>
         <td style="color:var(--gray)">#${allSorted.length - i}</td>
         <td>${s.unit || '—'}</td>
-        <td><strong style="color:${barColor}">${s.score || '—'}</strong>
+        <td><strong style="color:${barColor}">${pctDisplay}</strong>
           <span class="history-pct-bar" style="width:${Math.min(pct, 100) * 0.6}px;background:${barColor}"></span>
         </td>
         <td>${s.correct || 0} / ${s.total || 0}</td>
-        <td style="color:var(--gray);font-size:11px">${s.date || '—'}</td>
+        <td style="color:var(--gray);font-size:11px">${dateStr}</td>
       </tr>`;
     });
 
