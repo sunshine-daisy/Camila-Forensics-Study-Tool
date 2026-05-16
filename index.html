@@ -1235,6 +1235,7 @@ body::before {
       <span class="score-badge">Session: <span id="session-score-display">0/0</span></span>
       <button class="btn-ghost" onclick="showHistory()">📊 History</button>
       <button class="btn-ghost" style="color:var(--pink);border-color:rgba(255,45,120,0.3);" onclick="endAndSave()">💾 End & Save</button>
+      <button class="btn-ghost" onclick="switchUser()">🔄 Switch User</button>
       <button class="btn-ghost" onclick="goHome()">🏠 Home</button>
     </div>
   </div>
@@ -1417,17 +1418,17 @@ const UNITS = [
       { type: "mc", q: "When wool (a protein fiber) is held to a flame, it:", options: ["Ignites easily, burns steadily, smells like paper", "Shrinks away from flame, self-extinguishes, smells like burning hair, leaves brittle dark ash", "Melts and drips, forming a hard bead", "Produces sweet chemical odor, no ash"], correct: 1, explain: "Protein fibers (wool, silk) shrink away from flame — keratin is sensitive to heat. They self-extinguish, smell like burning hair, and leave a brittle, crushable dark ash." },
       { type: "fitb", q: "Density is calculated as D = ______ ÷ ______.", answer: "mass / volume", display: "mass / volume", explain: "D = M ÷ V (mass divided by volume). For glass, density is expressed in g/mL. This formula is the foundation of glass density comparison in forensic analysis." , boxes: 2},
       { type: "fitb", q: "For glass analysis, density is expressed in ______ per mL.", answer: "grams / g", display: "grams (g)", explain: "Glass density is measured in grams per milliliter (g/mL). Window glass: 2.46–2.49; headlight: 2.47–2.63; pyrex: 2.23–2.36; lead glass: 2.9–5.9 g/mL." },
-      { type: "mc", q: "A glass fragment has a density of 2.55 g/mL. This is most consistent with:", options: ["Window glass (2.46–2.49)", "Headlight glass (2.47–2.63)", "Pyrex/borosilicate (2.23–2.36)", "Lead glass (2.9–5.9)"], correct: 1, explain: "2.55 g/mL falls within the headlight glass range (2.47–2.63). This would direct investigators to examine vehicles rather than windows as the glass source." }
+      { type: "mc", q: "A glass fragment has a density of 2.55 g/mL. This is most consistent with:", options: ["Window glass", "Headlight glass", "Pyrex/borosilicate glass", "Lead glass"], correct: 1, explain: "2.55 g/mL falls within the headlight glass range (2.47–2.63). This would direct investigators to examine vehicles rather than windows as the glass source." }
     ,
       // --- SCENARIO QUESTIONS ---
       { type: "mc", q: "A suspect is found with a fiber on their jacket that matches carpet from a victim's home. The fiber is red polyester. The victim's home has red polyester carpet. This fiber is:", options: ["Individual evidence — it proves the suspect was there", "Class evidence — many homes could have similar carpet", "Biological evidence — it contains DNA", "Inadmissible — fibers are not accepted in court"], correct: 1, explain: "Polyester carpet fiber is class evidence — many manufacturers produce identical fibers. It cannot pinpoint this exact carpet. Combined with other trace evidence (hair, soil, glass), it strengthens the case significantly." },
       { type: "mc", q: "A detective collects a single red fiber from a victim's body using forceps. What is the correct packaging method?", options: ["Place directly in a plastic zip-lock bag", "Place in a paper bindle first, then seal in an envelope", "Tape to a cardboard card", "Store loose in a glass vial"], correct: 1, explain: "Tiny trace evidence like single fibers goes in a paper bindle (druggist fold) first to prevent loss, then the bindle is placed in a labeled envelope. Plastic can create static that destroys tiny fibers." },
-      { type: "mc", q: "Glass fragments are found at a hit-and-run scene. The fragments have a density of 2.52 g/mL. A suspect's vehicle has a broken headlight. This is MOST consistent with:", options: ["Window glass from a nearby building", "Headlight glass (density 2.47–2.63 g/mL)", "Pyrex glass (2.23–2.36 g/mL)", "Lead crystal glass (2.9–5.9 g/mL)"], correct: 1, explain: "2.52 g/mL falls within the headlight glass range (2.47–2.63). This is consistent with the broken headlight on the suspect's vehicle — not window glass (2.46–2.49) or pyrex (too light)." },
+      { type: "mc", q: "Glass fragments are found at a hit-and-run scene. The fragments have a density of 2.52 g/mL. A suspect's vehicle has a broken headlight. This is MOST consistent with:", options: ["Window glass from a nearby building", "Headlight glass", "Pyrex glass", "Lead crystal glass"], correct: 1, explain: "2.52 g/mL falls within the headlight glass range (2.47–2.63). This is consistent with the broken headlight on the suspect's vehicle — not window glass (2.46–2.49) or pyrex (too light)." },
       { type: "mc", q: "A hair is found at a crime scene. Under the microscope it shows: medullary index > 1/3, continuous medulla, and coronal cuticle. This hair belongs to:", options: ["A human — imbricate cuticle is definitive", "An animal — medullary index > 1/3 and coronal cuticle indicate non-human", "A child — smaller medullary index", "Cannot be determined without DNA"], correct: 1, explain: "Medullary index > 1/3 = animal (humans are < 1/3). Coronal cuticle (stacked cups) is found in rodents, not humans. Imbricate cuticle (flat overlapping scales) is the human pattern." },
       { type: "mc", q: "A fiber sample is burned in the lab. It ignites easily, burns steadily all the way through, leaves a soft gray ash, and smells like burning paper. This fiber is:", options: ["Wool (protein)", "Polyester (synthetic)", "Cotton (cellulose)", "Rayon (semi-synthetic)"], correct: 2, explain: "Cotton is a cellulose fiber — it burns steadily like paper (same chemical composition), leaves a soft gray ash, and smells like burning paper. Wool shrinks from flame and smells like burning hair. Synthetics melt." },
       // --- DENSITY MATH ---
       { type: "fitb", q: "A glass fragment found at a crime scene has a mass of 7.5 g and a volume of 3.0 mL. The density of the fragment is ______ g/mL, which is consistent with the standard density of ______ glass.", answer: "2.5 / window", display: "2.5 / window (soda-lime)", explain: "D = M/V = 7.5 ÷ 3.0 = 2.5 g/mL. Window (soda-lime) glass has a standard density of 2.46–2.49 g/mL — 2.5 is within range. This would suggest the fragment came from a window rather than a headlight or specialty glass." , boxes: 2},
-      { type: "mc", q: "A forensic scientist measures a glass fragment recovered from a hit-and-run scene: mass = 11.0 g, volume = 5.0 mL. Based on the calculated density, which type of glass is this consistent with?", options: ["Lead crystal glass (2.9–5.9 g/mL)", "Window/soda-lime glass (2.46–2.49 g/mL)", "Headlight/borosilicate glass (2.47–2.63 g/mL)", "Tempered patio door glass (above 3.0 g/mL)"], correct: 1, explain: "D = 11.0 ÷ 5.0 = 2.2 g/mL. This actually falls below all standard ranges — closest to pyrex (2.23–2.36). However, per the question intent: 2.2 is nearest window/soda-lime. In practice, a density this low would prompt re-testing. Forensic note: always use exact density tables." },
+      { type: "mc", q: "A forensic scientist measures a glass fragment recovered from a hit-and-run scene: mass = 11.0 g, volume = 5.0 mL. Based on the calculated density, which type of glass is this consistent with?", options: ["Lead crystal glass", "Window/soda-lime glass", "Headlight/borosilicate glass", "Tempered patio door glass"], correct: 1, explain: "D = 11.0 ÷ 5.0 = 2.2 g/mL. This actually falls below all standard ranges — closest to pyrex (2.23–2.36). However, per the question intent: 2.2 is nearest window/soda-lime. In practice, a density this low would prompt re-testing. Forensic note: always use exact density tables." },
       // --- NEW MATCHING SET: Fiber burn results ---
       { type: "matching", q: "Match each fiber to its burn test result:", pairs: [
         ["Cotton", "Burns steadily, soft gray ash, smells like burning paper"],
@@ -2238,7 +2239,7 @@ async function validateCode() {
     const json = await res.json();
 
     if (json.valid) {
-      localStorage.setItem(CODE_CACHE_KEY, code);
+      // Don't cache code — always require entry on next visit
       if (json.name) localStorage.setItem('forensics_student_name', json.name);
       onCodeValid(json.name || null);
     } else {
@@ -2344,28 +2345,10 @@ async function submitRequest() {
 }
 
 // Check localStorage on page load — skip code screen if already validated
+// No auto-bypass on page load — always show code screen
+// This allows multiple users to share the same device
 window.addEventListener('load', () => {
-  const cached = localStorage.getItem(CODE_CACHE_KEY);
-  if (cached) {
-    // Verify cached code against sheet — only bypass screen if confirmed valid
-    fetch(APPS_SCRIPT_URL + '?action=checkCode&code=' + encodeURIComponent(cached))
-      .then(r => r.json())
-      .then(json => {
-        if (json.valid) {
-          if (json.name) localStorage.setItem('forensics_student_name', json.name);
-          onCodeValid(json.name || localStorage.getItem('forensics_student_name'));
-        } else {
-          // Code revoked or invalid — clear and show code screen
-          localStorage.removeItem(CODE_CACHE_KEY);
-          localStorage.removeItem('forensics_student_name');
-        }
-      })
-      .catch(() => {
-        // Network/CORS error — show code screen, let user re-enter
-        // Don't auto-bypass so we don't lock people out silently
-        localStorage.removeItem(CODE_CACHE_KEY);
-      });
-  }
+  // Code screen always shown fresh — no pre-fill
 });
 
 // ============================================================
@@ -2478,13 +2461,33 @@ function startWithUnit(idx) {
 }
 
 function changeName() {
+  switchUser();
+}
+
+function switchUser() {
   saveCurrentScore();
   sessionCorrect = 0;
   sessionAnswered = 0;
   answeredMap = {};
   clearSessionQuestions();
   completedPasses = {};
+  studentName = '';
+  localStorage.removeItem(CODE_CACHE_KEY);
+  localStorage.removeItem('forensics_student_name');
+  // Reset code card UI fully
+  document.getElementById('code-input').value = '';
+  document.getElementById('code-error').classList.remove('show');
+  document.getElementById('code-actions').style.display = 'none';
+  document.getElementById('request-form').classList.remove('show');
+  document.getElementById('request-success').classList.remove('show');
+  document.querySelector('.code-card h3').textContent = '🔒 Enter Access Code';
+  document.querySelector('#code-card .name-input-row').style.display = 'flex';
+  // Show code card, hide name/units cards
+  document.getElementById('code-card').style.display = 'block';
+  document.getElementById('name-card').style.display = 'none';
+  document.getElementById('units-card').style.display = 'none';
   showScreen('welcome-screen');
+  document.getElementById('code-input').focus();
 }
 
 function goHome() {
@@ -2751,7 +2754,7 @@ function renderQuestion(q, idx, total) {
       html += `<div class="feedback ${answered.correct ? 'correct' : 'incorrect'} show">
         ${answered.correct
           ? `<span class="feedback-result">✅ Correct!</span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`
-          : `<span class="feedback-result">❌ Not quite — correct answer: <strong>${q.options[q._correctShuffled] || q.options[q.correct]}</strong></span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`}
+          : `<span class="feedback-result">❌ Not quite — correct answer: <strong>${q._shuffled ? q._shuffled[q._correctShuffled] : q.options[q.correct]}</strong></span>${q.explain ? '<div class=\"feedback-explain\">' + q.explain + '</div>' : ''}`}
       </div>`;
     }
   } else if (q.type === "fitb") {
