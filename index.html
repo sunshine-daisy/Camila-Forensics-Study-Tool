@@ -59,48 +59,44 @@ body::before {
 #welcome-screen {
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 20px;
+  padding: 4px 16px 8px;
   background: radial-gradient(ellipse at 50% 0%, rgba(255,45,120,0.12) 0%, transparent 60%);
 }
 
 .welcome-inner {
-  max-width: 560px;
+  max-width: 620px;
   width: 100%;
   text-align: center;
 }
 
 .crime-tape {
+  display: none;
   background: #f5d000;
   color: #000;
   font-family: Arial, 'Helvetica Neue', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  padding: 8px 0;
+  padding: 5px 0;
   width: 120%;
   margin-left: -10%;
-  margin-bottom: 40px;
-  transform: rotate(-4deg);
+  margin-bottom: 12px;
+  transform: rotate(-2deg);
   white-space: nowrap;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
-.welcome-icon {
-  font-size: 36px;
-  margin-bottom: 16px;
-  display: block;
-  filter: drop-shadow(0 0 20px rgba(255,45,120,0.5));
-}
+.welcome-icon { display: none; }
 
 .welcome-title {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(20px, 4vw, 36px);
+  font-size: clamp(28px, 5vw, 46px);
   white-space: nowrap;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   background: linear-gradient(135deg, #fff 0%, var(--pink-light) 50%, var(--pink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -112,7 +108,7 @@ body::before {
   color: var(--gray);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 /* ACCESS CODE SYSTEM */
@@ -233,8 +229,8 @@ body::before {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 14px 18px;
-  margin-bottom: 10px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
 }
 
 .welcome-card h3 {
@@ -335,37 +331,37 @@ body::before {
 .unit-preview-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 6px;
 }
 
 .unit-preview-item {
   background: var(--bg3);
-  border-radius: 12px;
-  padding: 12px 12px 10px;
+  border-radius: 10px;
+  padding: 10px 10px 8px;
   text-align: left;
   border-top: 3px solid var(--pink);
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   position: relative;
 }
 .unit-preview-item:hover { background: var(--bg2); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-.unit-preview-item .unit-num { font-size: 10px; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; }
-.unit-preview-item .unit-name { font-family: Arial, 'Helvetica Neue', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); line-height: 1.3; }
-.unit-preview-item .unit-qs { font-size: 10px; font-weight: 400; color: var(--gray); margin-top: 2px; }
+.unit-preview-item .unit-num { font-size: 9px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0; }
+.unit-preview-item .unit-name { font-family: Arial, 'Helvetica Neue', sans-serif; font-size: 12px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.unit-preview-item .unit-qs { font-size: 9px; font-weight: 400; color: var(--gray); margin-top: 0; }
 .unit-preview-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
 .unit-preview-footer .start-hint { font-size: 10px; color: var(--pink); letter-spacing: 0.5px; opacity: 0.8; }
 
 /* Progress ring on home screen */
-.home-ring-wrap { position: relative; width: 62px; height: 62px; flex-shrink: 0; }
+.home-ring-wrap { position: relative; width: 54px; height: 54px; flex-shrink: 0; }
 .home-ring-wrap svg { transform: rotate(-90deg); }
 .home-ring-pct {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 10px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   color: var(--white); white-space: nowrap;
   font-family: 'Space Mono', monospace;
   letter-spacing: -0.5px;
@@ -1139,8 +1135,7 @@ body::before {
 <div id="welcome-screen" class="screen active">
   <div class="welcome-inner">
     <div class="crime-tape">⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠ &nbsp; CRIME SCENE — DO NOT CROSS &nbsp; ⚠</div>
-    <span class="welcome-icon">🔬</span>
-    <h1 class="welcome-title">FORENSIC<br>SCIENCE</h1>
+    <h1 class="welcome-title">FORENSIC &nbsp;🔬&nbsp; SCIENCE</h1>
     <p class="welcome-subtitle">Honors Forensic Science • Ms. Makley • Zionsville</p>
 
     <div class="alert-banner">
@@ -1227,7 +1222,7 @@ body::before {
           <div class="unit-preview-footer">
             <span class="start-hint">→ Start studying</span>
             <div class="home-ring-wrap">
-              <svg width="62" height="62" viewBox="0 0 52 52">
+              <svg width="54" height="54" viewBox="0 0 52 52">
                 <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
                 <circle id="home-ring-0" cx="26" cy="26" r="20" fill="none" stroke="#ff2d78" stroke-width="3"
                   stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round"/>
@@ -1243,7 +1238,7 @@ body::before {
           <div class="unit-preview-footer">
             <span class="start-hint">→ Start studying</span>
             <div class="home-ring-wrap">
-              <svg width="62" height="62" viewBox="0 0 52 52">
+              <svg width="54" height="54" viewBox="0 0 52 52">
                 <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
                 <circle id="home-ring-1" cx="26" cy="26" r="20" fill="none" stroke="#c026d3" stroke-width="3"
                   stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round"/>
@@ -1259,7 +1254,7 @@ body::before {
           <div class="unit-preview-footer">
             <span class="start-hint">→ Start studying</span>
             <div class="home-ring-wrap">
-              <svg width="62" height="62" viewBox="0 0 52 52">
+              <svg width="54" height="54" viewBox="0 0 52 52">
                 <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
                 <circle id="home-ring-2" cx="26" cy="26" r="20" fill="none" stroke="#7c3aed" stroke-width="3"
                   stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round"/>
@@ -1275,7 +1270,7 @@ body::before {
           <div class="unit-preview-footer">
             <span class="start-hint">→ Start studying</span>
             <div class="home-ring-wrap">
-              <svg width="62" height="62" viewBox="0 0 52 52">
+              <svg width="54" height="54" viewBox="0 0 52 52">
                 <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
                 <circle id="home-ring-3" cx="26" cy="26" r="20" fill="none" stroke="#2563eb" stroke-width="3"
                   stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round"/>
@@ -1291,7 +1286,7 @@ body::before {
           <div class="unit-preview-footer">
             <span class="start-hint">→ Start studying</span>
             <div class="home-ring-wrap">
-              <svg width="62" height="62" viewBox="0 0 52 52">
+              <svg width="54" height="54" viewBox="0 0 52 52">
                 <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
                 <circle id="home-ring-4" cx="26" cy="26" r="20" fill="none" stroke="#0891b2" stroke-width="3"
                   stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round"/>
